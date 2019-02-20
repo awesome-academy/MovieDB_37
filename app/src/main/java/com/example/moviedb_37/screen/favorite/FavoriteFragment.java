@@ -17,4 +17,9 @@ public class FavoriteFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_favorite, container, false);
     }
+
+    public static FavoriteFragment newInstance() {
+        FavoriteFragment fragment = new FavoriteFragment();
+        return fragment;
+    }
 }
