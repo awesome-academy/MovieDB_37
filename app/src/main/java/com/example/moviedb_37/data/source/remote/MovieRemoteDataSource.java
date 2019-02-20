@@ -1,8 +1,8 @@
 package com.example.moviedb_37.data.source.remote;
 
 import com.example.moviedb_37.data.source.MovieDataSource;
-import com.example.moviedb_37.data.source.remote.config.NameApi;
-import com.example.moviedb_37.data.source.remote.config.NameServiceClient;
+import com.example.moviedb_37.data.source.remote.config.service.NameApi;
+import com.example.moviedb_37.data.source.remote.config.service.NameServiceClient;
 
 public class MovieRemoteDataSource implements MovieDataSource.Remote {
 
