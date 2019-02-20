@@ -6,7 +6,7 @@ import com.example.moviedb_37.util.StringUtil;
 
 public class NameServiceClient extends ServiceClient {
 
-    private static final String END_POINT_URL = "https://api.themoviedb.org/3";
+    private static final String END_POINT_URL = "https://api.themoviedb.org/3/";
     private static final String EXCEPTION_MESSAGE =
             " is not initialized, call initialize(..) method first.";
     private static NameApi sApiInstacne;
