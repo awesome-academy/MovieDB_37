@@ -3,6 +3,7 @@ package com.example.moviedb_37.screen.main;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -14,14 +15,15 @@ import com.example.moviedb_37.util.ActivityUtils;
 public class MainActivity extends AppCompatActivity implements
         BottomNavigationView.OnNavigationItemSelectedListener {
 
-    public static final String HOME_VIEWMODEL_TAG = "HOME_VIEWMODEL_TAG";
-    public static final String FAVORITE_VIEWMODEL_TAG = "FAVORITE_VIEWMODEL_TAG";
+    private Fragment mCurrentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupBottomNavigationView();
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                new HomeFragment(), R.id.frame_fragments_container);
     }
 
     private void setupBottomNavigationView() {
@@ -41,17 +43,29 @@ public class MainActivity extends AppCompatActivity implements
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                        new HomeFragment(), HOME_VIEWMODEL_TAG);
+                showHomeScreen();
                 break;
-            case R.id.navigation_my_fovorities:
-                ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                        new FavoriteFragment(), FAVORITE_VIEWMODEL_TAG);
-            case R.id.navigation_my_search:
+            case R.id.navigation_fovorities:
+                showFavoriteScreen();
+            case R.id.navigation_search:
                 break;
             default:
                 break;
         }
         return true;
     }
+
+
+    public void showHomeScreen() {
+        mCurrentFragment = HomeFragment.newInstance();
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                mCurrentFragment, R.id.frame_fragments_container);
+    }
+
+    public void showFavoriteScreen() {
+        mCurrentFragment = FavoriteFragment.newInstance();
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                mCurrentFragment, R.id.frame_fragments_container);
+    }
+
 }

@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/color_accent</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#FFFFFF</item>
+        <item name="colorControlActivated">#FF9100</item>
+    </style>
 </resources>
