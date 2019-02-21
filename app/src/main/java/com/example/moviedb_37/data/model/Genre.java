@@ -33,4 +33,7 @@ public class Genre {
         mName = name;
         return this;
     }
+
+    public Genre() {
+    }
 }

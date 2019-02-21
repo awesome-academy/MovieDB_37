@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.moviedb_37.screen.home.HomeViewModel" />
+    </data>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -292,3 +298,4 @@
             app:layout_constraintTop_toBottomOf="@id/recycler_genres" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
+</layout>
