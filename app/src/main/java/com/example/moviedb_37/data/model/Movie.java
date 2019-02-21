@@ -198,4 +198,7 @@ public class Movie {
         mCastResult = castResult;
         return this;
     }
+
+    public Movie() {
+    }
 }
