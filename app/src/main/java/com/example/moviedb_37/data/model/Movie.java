@@ -201,4 +201,8 @@ public class Movie {
 
     public Movie() {
     }
+
+    public float calculateVoteRating() {
+        return mVoteAverage / 2;
+    }
 }

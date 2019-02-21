@@ -5,297 +5,300 @@
             name="viewModel"
             type="com.example.moviedb_37.screen.home.HomeViewModel" />
     </data>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/home_background">
 
-    <android.support.constraint.ConstraintLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/dp_16"
-        android:paddingTop="@dimen/dp_8"
-        android:paddingRight="@dimen/dp_16">
+        android:background="@color/home_background">
 
-        <TextView
-            android:id="@+id/text_popular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginLeft="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_8"
-            android:text="@string/title_popular"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@color/color_blue"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/image_next_popular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/dp_8"
-            android:src="@drawable/ic_next"
-            app:layout_constraintBottom_toBottomOf="@id/text_popular"
-            app:layout_constraintStart_toEndOf="@id/text_popular"
-            app:layout_constraintTop_toTopOf="@id/text_popular"
-            android:paddingLeft="@dimen/dp_8" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_popular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_popular" />
-
-        <ImageView
-            android:id="@+id/image_load_more_popular"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_36"
-            android:layout_marginTop="@dimen/dp_8"
-            android:background="@color/color_brighter_black"
-            android:padding="@dimen/dp_4"
-            android:src="@drawable/ic_arrow_down"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recycler_popular" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingTop="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_16">
 
-        <TextView
-            android:id="@+id/text_view_more_popular"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_8"
-            android:padding="@dimen/dp_4"
-            android:text="@string/title_view_more"
-            android:textColor="@color/color_blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_load_more_popular" />
+            <TextView
+                android:id="@+id/text_popular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@string/title_popular"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/color_blue"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/text_now_playing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginLeft="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_8"
-            android:text="@string/title_now_playing"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@color/color_blue"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_more_popular" />
+            <ImageView
+                android:id="@+id/image_next_popular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_8"
+                android:paddingLeft="@dimen/dp_8"
+                android:src="@drawable/ic_next"
+                app:layout_constraintBottom_toBottomOf="@id/text_popular"
+                app:layout_constraintStart_toEndOf="@id/text_popular"
+                app:layout_constraintTop_toTopOf="@id/text_popular" />
 
-        <ImageView
-            android:id="@+id/image_next_now_playing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/dp_8"
-            android:src="@drawable/ic_next"
-            app:layout_constraintBottom_toBottomOf="@id/text_now_playing"
-            app:layout_constraintStart_toEndOf="@id/text_now_playing"
-            app:layout_constraintTop_toTopOf="@id/text_now_playing"
-            android:paddingLeft="@dimen/dp_8" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_popular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:bindMovies="@{viewModel.popularMovies}"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_popular" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_now_playing"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_now_playing" />
+            <ImageView
+                android:id="@+id/image_load_more_popular"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_36"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/color_brighter_black"
+                android:onClick="@{viewModel::onClickLoadMorePopular}"
+                android:padding="@dimen/dp_4"
+                android:src="@drawable/ic_arrow_down"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recycler_popular"
+                app:setVisibility="@{!viewModel.mIsLoadMorePopular}" />
 
-        <ImageView
-            android:id="@+id/image_load_more_now_playing"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_36"
-            android:layout_marginTop="@dimen/dp_8"
-            android:background="@color/color_brighter_black"
-            android:padding="@dimen/dp_4"
-            android:src="@drawable/ic_arrow_down"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recycler_now_playing" />
+            <TextView
+                android:id="@+id/text_view_more_popular"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_8"
+                android:padding="@dimen/dp_4"
+                android:text="@string/title_view_more"
+                android:textColor="@color/color_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_load_more_popular" />
 
-        <TextView
-            android:id="@+id/text_view_more_now_playing"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_8"
-            android:padding="@dimen/dp_4"
-            android:text="@string/title_view_more"
-            android:textColor="@color/color_blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_load_more_now_playing" />
+            <TextView
+                android:id="@+id/text_now_playing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@string/title_now_playing"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/color_blue"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_more_popular" />
 
-        <TextView
-            android:id="@+id/text_up_coming"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginLeft="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_16"
-            android:text="@string/title_up_coming"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@color/color_blue"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_more_now_playing" />
+            <ImageView
+                android:id="@+id/image_next_now_playing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_8"
+                android:paddingLeft="@dimen/dp_8"
+                android:src="@drawable/ic_next"
+                app:layout_constraintBottom_toBottomOf="@id/text_now_playing"
+                app:layout_constraintStart_toEndOf="@id/text_now_playing"
+                app:layout_constraintTop_toTopOf="@id/text_now_playing" />
 
-        <ImageView
-            android:id="@+id/image_next_up_coming"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/dp_8"
-            android:src="@drawable/ic_next"
-            app:layout_constraintBottom_toBottomOf="@id/text_up_coming"
-            app:layout_constraintStart_toEndOf="@id/text_up_coming"
-            app:layout_constraintTop_toTopOf="@id/text_up_coming"
-            android:paddingLeft="@dimen/dp_8" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_now_playing"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:bindMovies="@{viewModel.nowPlayingMovies}"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_now_playing" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_up_coming"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_up_coming" />
+            <ImageView
+                android:id="@+id/image_load_more_now_playing"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_36"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/color_brighter_black"
+                android:onClick="@{viewModel::onClickLoadMoreNowPlaying}"
+                android:padding="@dimen/dp_4"
+                android:src="@drawable/ic_arrow_down"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recycler_now_playing"
+                app:setVisibility="@{!viewModel.mIsLoadMoreNowPlaying}" />
 
-        <ImageView
-            android:id="@+id/image_load_more_up_coming"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_36"
-            android:layout_marginTop="@dimen/dp_8"
-            android:background="@color/color_brighter_black"
-            android:padding="@dimen/dp_4"
-            android:src="@drawable/ic_arrow_down"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recycler_up_coming" />
+            <TextView
+                android:id="@+id/text_view_more_now_playing"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_8"
+                android:padding="@dimen/dp_4"
+                android:text="@string/title_view_more"
+                android:textColor="@color/color_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_load_more_now_playing" />
 
-        <TextView
-            android:id="@+id/text_view_more_up_coming"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_8"
-            android:padding="@dimen/dp_4"
-            android:text="@string/title_view_more"
-            android:textColor="@color/color_blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_load_more_up_coming" />
+            <TextView
+                android:id="@+id/text_up_coming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="@string/title_up_coming"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/color_blue"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_more_now_playing" />
 
-        <TextView
-            android:id="@+id/text_top_rate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginLeft="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_16"
-            android:text="@string/title_top_rate"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@color/color_blue"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_more_up_coming" />
+            <ImageView
+                android:id="@+id/image_next_up_coming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_8"
+                android:paddingLeft="@dimen/dp_8"
+                android:src="@drawable/ic_next"
+                app:layout_constraintBottom_toBottomOf="@id/text_up_coming"
+                app:layout_constraintStart_toEndOf="@id/text_up_coming"
+                app:layout_constraintTop_toTopOf="@id/text_up_coming" />
 
-        <ImageView
-            android:id="@+id/image_next_top_rate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/dp_8"
-            android:src="@drawable/ic_next"
-            app:layout_constraintBottom_toBottomOf="@id/text_top_rate"
-            app:layout_constraintStart_toEndOf="@id/text_top_rate"
-            app:layout_constraintTop_toTopOf="@id/text_top_rate"
-            android:paddingLeft="@dimen/dp_8" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_up_coming"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:bindMovies="@{viewModel.upComingMovies}"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_up_coming" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_top_rate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_top_rate" />
+            <ImageView
+                android:id="@+id/image_load_more_up_coming"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_36"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/color_brighter_black"
+                android:onClick="@{viewModel::onClickLoadMoreUpComing}"
+                android:padding="@dimen/dp_4"
+                android:src="@drawable/ic_arrow_down"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recycler_up_coming"
+                app:setVisibility="@{!viewModel.mIsLoadMoreUpComing}" />
 
-        <ImageView
-            android:id="@+id/image_load_more_top_rate"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_36"
-            android:layout_marginTop="@dimen/dp_8"
-            android:background="@color/color_brighter_black"
-            android:padding="@dimen/dp_4"
-            android:src="@drawable/ic_arrow_down"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recycler_top_rate" />
+            <TextView
+                android:id="@+id/text_view_more_up_coming"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_8"
+                android:padding="@dimen/dp_4"
+                android:text="@string/title_view_more"
+                android:textColor="@color/color_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_load_more_up_coming" />
 
-        <TextView
-            android:id="@+id/text_view_more_top_rate"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_8"
-            android:padding="@dimen/dp_4"
-            android:text="@string/title_view_more"
-            android:textColor="@color/color_blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_load_more_top_rate" />
+            <TextView
+                android:id="@+id/text_top_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="@string/title_top_rate"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/color_blue"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_more_up_coming" />
 
-        <TextView
-            android:id="@+id/text_genres"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginLeft="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_16"
-            android:text="@string/title_genres"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@color/color_blue"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_more_top_rate" />
+            <ImageView
+                android:id="@+id/image_next_top_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_8"
+                android:paddingLeft="@dimen/dp_8"
+                android:src="@drawable/ic_next"
+                app:layout_constraintBottom_toBottomOf="@id/text_top_rate"
+                app:layout_constraintStart_toEndOf="@id/text_top_rate"
+                app:layout_constraintTop_toTopOf="@id/text_top_rate" />
 
-        <ImageView
-            android:id="@+id/image_next_genres"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/dp_8"
-            android:src="@drawable/ic_next"
-            app:layout_constraintBottom_toBottomOf="@id/text_genres"
-            app:layout_constraintStart_toEndOf="@id/text_genres"
-            app:layout_constraintTop_toTopOf="@id/text_genres"
-            android:paddingLeft="@dimen/dp_8" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_top_rate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:bindMovies="@{viewModel.topRateMovies}"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_top_rate" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_genres"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_genres" />
+            <ImageView
+                android:id="@+id/image_load_more_top_rate"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_36"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/color_brighter_black"
+                android:onClick="@{viewModel::onClickLoadMoreTopRate}"
+                android:padding="@dimen/dp_4"
+                android:src="@drawable/ic_arrow_down"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recycler_top_rate"
+                app:setVisibility="@{!viewModel.mIsLoadMoreTopRate}" />
 
-        <TextView
-            android:id="@+id/text_view_more_genres"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_8"
-            android:padding="@dimen/dp_4"
-            android:text="@string/title_view_more"
-            android:textColor="@color/color_blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recycler_genres" />
-    </android.support.constraint.ConstraintLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/text_view_more_top_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_8"
+                android:padding="@dimen/dp_4"
+                android:text="@string/title_view_more"
+                android:textColor="@color/color_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_load_more_top_rate" />
+
+            <TextView
+                android:id="@+id/text_genres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="@string/title_genres"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/color_blue"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_more_top_rate" />
+
+            <ImageView
+                android:id="@+id/image_next_genres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_8"
+                android:paddingLeft="@dimen/dp_8"
+                android:src="@drawable/ic_next"
+                app:layout_constraintBottom_toBottomOf="@id/text_genres"
+                app:layout_constraintStart_toEndOf="@id/text_genres"
+                app:layout_constraintTop_toTopOf="@id/text_genres" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_genres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:bindGenres="@{viewModel.genres}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_genres" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 </layout>
