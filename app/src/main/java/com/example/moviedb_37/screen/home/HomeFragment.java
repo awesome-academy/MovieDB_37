@@ -11,12 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.moviedb_37.R;
-import com.example.moviedb_37.data.model.Genre;
-import com.example.moviedb_37.data.model.Movie;
+import com.example.moviedb_37.data.repository.MovieRepository;
+import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.FragmentHomeBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -51,19 +48,13 @@ public class HomeFragment extends Fragment {
     }
 
     private void initViewModel() {
-        List<Movie> popularMovie = new ArrayList<>();
-        List<Movie> toprateMovie = new ArrayList<>();
-        List<Movie> upComingMovie = new ArrayList<>();
-        List<Movie> nowPlayingMovie = new ArrayList<>();
-        List<Genre> genres = new ArrayList<>();
+        MovieRepository movieRepository = MovieRepository.getInstance(
+                MovieRemoteDataSource.getInstance());
+        mViewModel = new HomeViewModel(movieRepository);
+    }
 
-        mPopularAdapter = new CategoryAdapter(popularMovie);
-        mNowPlayingAdapter = new CategoryAdapter(nowPlayingMovie);
-        mTopRateAdapter = new CategoryAdapter(toprateMovie);
-        mUpComingAdapter = new CategoryAdapter(upComingMovie);
-        mGenresAdapter = new GenresAdapter(genres);
-
-        mViewModel = new HomeViewModel(mPopularAdapter,
-                mNowPlayingAdapter, mTopRateAdapter, mUpComingAdapter, mGenresAdapter);
+    public void onDestroy() {
+        super.onDestroy();
+        mViewModel.clear();
     }
 }

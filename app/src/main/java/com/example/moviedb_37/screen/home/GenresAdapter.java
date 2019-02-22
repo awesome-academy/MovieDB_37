@@ -15,6 +15,7 @@ import java.util.List;
 public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.ViewHolder> {
 
     private List<Genre> mGenres;
+    private ItemClickListener mItemClickListener;
 
     public GenresAdapter(List<Genre> genres) {
         this.mGenres = genres;
@@ -29,7 +30,7 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.ViewHolder
                 viewGroup,
                 false
         );
-        return new ViewHolder(binding);
+        return new ViewHolder(binding, mItemClickListener);
     }
 
     @Override
@@ -42,21 +43,9 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.ViewHolder
         return mGenres != null ? mGenres.size() : 0;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemGenreBinding mBinding;
-        private ItemGenreListViewModel mItemGenresListViewModel;
-
-        public ViewHolder(ItemGenreBinding binding) {
-            super(binding.getRoot());
-            mBinding = binding;
-            mItemGenresListViewModel = new ItemGenreListViewModel();
-            mBinding.setViewModel(mItemGenresListViewModel);
-        }
-
-        public void bindData(Genre genre) {
-            mItemGenresListViewModel.setGenres(genre);
-            mBinding.executePendingBindings();
-        }
+    public GenresAdapter setItemClickListener(ItemClickListener itemClickListener) {
+        mItemClickListener = itemClickListener;
+        return this;
     }
 
     public void addData(List<Genre> genres) {
@@ -68,5 +57,26 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.ViewHolder
         mGenres.clear();
         mGenres.addAll(genres);
         notifyDataSetChanged();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private ItemGenreBinding mBinding;
+        private ItemGenreListViewModel mItemGenresListViewModel;
+
+        public ViewHolder(ItemGenreBinding binding, ItemClickListener listener) {
+            super(binding.getRoot());
+            mBinding = binding;
+            mItemGenresListViewModel = new ItemGenreListViewModel(listener);
+            mBinding.setViewModel(mItemGenresListViewModel);
+        }
+
+        public void bindData(Genre genre) {
+            mItemGenresListViewModel.setGenre(genre);
+            mBinding.executePendingBindings();
+        }
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(Genre genre);
     }
 }

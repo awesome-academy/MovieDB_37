@@ -1,5 +1,6 @@
 package com.example.moviedb_37.data.source.remote;
 
+import com.example.moviedb_37.BuildConfig;
 import com.example.moviedb_37.data.model.Genre;
 import com.example.moviedb_37.data.model.Movie;
 
@@ -17,6 +18,7 @@ import io.reactivex.Single;
 
 public class MovieRemoteDataSource implements MovieDataSource.Remote {
 
+    private static final String API_KEY = BuildConfig.API_KEY;
     private static MovieRemoteDataSource sInstance;
     private NameApi mApi;
 
@@ -41,7 +43,7 @@ public class MovieRemoteDataSource implements MovieDataSource.Remote {
                 });
     }
 
-    public Single<List<Movie>> getNowPlayingMovies (int page) {
+    public Single<List<Movie>> getNowPlayingMovies(int page) {
         return mApi.getNowPlayingMovies(page)
                 .map(new Function<CategoryResult, List<Movie>>() {
                     @Override
