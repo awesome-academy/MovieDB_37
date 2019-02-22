@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
+    <import type="com.example.moviedb_37.data.model.CategoryKey" />
+
+    <import type="com.example.moviedb_37.data.model.CategoryName" />
+
     <data>
         <variable
             name="viewModel"
@@ -28,6 +33,8 @@
                 android:layout_marginStart="@dimen/dp_8"
                 android:layout_marginLeft="@dimen/dp_8"
                 android:layout_marginTop="@dimen/dp_8"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view
+                , CategoryKey.CATEGORY_POPULAR, CategoryName.CATEGORY_POPULAR)}"
                 android:text="@string/title_popular"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textColor="@color/color_blue"
@@ -39,6 +46,8 @@
                 android:id="@+id/image_next_popular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view
+                ,CategoryKey.CATEGORY_POPULAR, CategoryName.CATEGORY_POPULAR)}"
                 android:paddingStart="@dimen/dp_8"
                 android:paddingLeft="@dimen/dp_8"
                 android:src="@drawable/ic_next"
@@ -75,6 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_30"
                 android:layout_marginTop="@dimen/dp_8"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_POPULAR, CategoryName.CATEGORY_POPULAR)}"
                 android:padding="@dimen/dp_4"
                 android:text="@string/title_view_more"
                 android:textColor="@color/color_blue"
@@ -89,6 +99,7 @@
                 android:layout_marginStart="@dimen/dp_8"
                 android:layout_marginLeft="@dimen/dp_8"
                 android:layout_marginTop="@dimen/dp_8"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_NOW_PLAYING, CategoryName.CATEGORY_NOW_PLAYING)}"
                 android:text="@string/title_now_playing"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textColor="@color/color_blue"
@@ -100,6 +111,7 @@
                 android:id="@+id/image_next_now_playing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_NOW_PLAYING, CategoryName.CATEGORY_NOW_PLAYING)}"
                 android:paddingStart="@dimen/dp_8"
                 android:paddingLeft="@dimen/dp_8"
                 android:src="@drawable/ic_next"
@@ -138,6 +150,7 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:padding="@dimen/dp_4"
                 android:text="@string/title_view_more"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_NOW_PLAYING, CategoryName.CATEGORY_NOW_PLAYING)}"
                 android:textColor="@color/color_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -150,6 +163,7 @@
                 android:layout_marginStart="@dimen/dp_8"
                 android:layout_marginLeft="@dimen/dp_8"
                 android:layout_marginTop="@dimen/dp_16"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_UP_COMING, CategoryName.CATEGORY_UP_COMING)}"
                 android:text="@string/title_up_coming"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textColor="@color/color_blue"
@@ -163,6 +177,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/dp_8"
                 android:paddingLeft="@dimen/dp_8"
+                android:onClick="@{viewModel::onClickLoadMoreUpComing}"
                 android:src="@drawable/ic_next"
                 app:layout_constraintBottom_toBottomOf="@id/text_up_coming"
                 app:layout_constraintStart_toEndOf="@id/text_up_coming"
@@ -184,7 +199,7 @@
                 android:layout_height="@dimen/dp_36"
                 android:layout_marginTop="@dimen/dp_8"
                 android:background="@color/color_brighter_black"
-                android:onClick="@{viewModel::onClickLoadMoreUpComing}"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_UP_COMING, CategoryName.CATEGORY_UP_COMING)}"
                 android:padding="@dimen/dp_4"
                 android:src="@drawable/ic_arrow_down"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -199,6 +214,7 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:padding="@dimen/dp_4"
                 android:text="@string/title_view_more"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_TOP_RATE, CategoryName.CATEGORY_TOP_RATE)}"
                 android:textColor="@color/color_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -224,6 +240,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/dp_8"
                 android:paddingLeft="@dimen/dp_8"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_TOP_RATE, CategoryName.CATEGORY_TOP_RATE)}"
                 android:src="@drawable/ic_next"
                 app:layout_constraintBottom_toBottomOf="@id/text_top_rate"
                 app:layout_constraintStart_toEndOf="@id/text_top_rate"
@@ -260,6 +277,7 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:padding="@dimen/dp_4"
                 android:text="@string/title_view_more"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_TOP_RATE, CategoryName.CATEGORY_TOP_RATE)}"
                 android:textColor="@color/color_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -279,22 +297,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_view_more_top_rate" />
 
-            <ImageView
-                android:id="@+id/image_next_genres"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/dp_8"
-                android:paddingLeft="@dimen/dp_8"
-                android:src="@drawable/ic_next"
-                app:layout_constraintBottom_toBottomOf="@id/text_genres"
-                app:layout_constraintStart_toEndOf="@id/text_genres"
-                app:layout_constraintTop_toTopOf="@id/text_genres" />
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_genres"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:bindGenres="@{viewModel.genres}"
+                app:bindItemClick="@{viewModel.itemClickListener}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_genres" />

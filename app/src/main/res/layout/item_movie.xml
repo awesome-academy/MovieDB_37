@@ -24,7 +24,7 @@
             android:layout_height="0dp"
             android:background="@color/color_brighter_black"
             android:padding="@dimen/dp_8"
-            android:scaleType="centerCrop"
+            android:scaleType='@{viewModel.mMovieObservableField.backdropPath == null ? "centerCrop" : "" }'
             app:imageUrl="@{viewModel.mMovieObservableField.backdropPath}"
             android:src="@drawable/ic_play_circle"
             app:layout_constraintBottom_toBottomOf="parent"

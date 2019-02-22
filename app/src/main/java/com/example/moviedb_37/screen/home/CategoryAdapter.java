@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.example.moviedb_37.R;
 import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.databinding.ItemMovieBinding;
+import com.example.moviedb_37.util.Constans;
 
 import java.util.List;
 
@@ -60,8 +61,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     public void addData(List<Movie> movies) {
+        int posotionStart = mMovies.size();
         mMovies.addAll(movies);
-        notifyDataSetChanged();
+        notifyItemRangeInserted(posotionStart, movies.size());
+    }
+
+    public void addData(Movie movie) {
+        mMovies.add(movie);
+        notifyItemInserted(mMovies.size() - Constans.INDEX_UNIT);
     }
 
     public void replaceData(List<Movie> movies) {
