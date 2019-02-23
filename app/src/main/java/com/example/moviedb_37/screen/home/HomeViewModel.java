@@ -1,8 +1,11 @@
 package com.example.moviedb_37.screen.home;
 
 import android.databinding.BaseObservable;
+import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.databinding.ObservableList;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -20,6 +23,12 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class HomeViewModel extends BaseObservable {
+
+    public static final String BUNDLE_SOURCE = "BUNDLE_SOURCE";
+    public static final String BUNDLE_KEY = "BUNDLE_KEY";
+    public static final String BUNDLE_NAME = "BUNDLE_NAME";
+    public static final int GENRE_SOURCE = 0;
+    public static final int CATEGORY_SOURCE = 1;
 
     public ObservableBoolean mIsLoadMorePopular = new ObservableBoolean();
     public ObservableBoolean mIsLoadMoreNowPlaying = new ObservableBoolean();
@@ -42,11 +51,14 @@ public class HomeViewModel extends BaseObservable {
     private List<Movie> mMoreUpComingMovies = new ArrayList<>();
     private List<Movie> mMoreTopRateMovies = new ArrayList<>();
 
-    private ObservableField<List<Movie>> mPopularMovies = new ObservableField<>();
-    private ObservableField<List<Movie>> mNowPlayingMovies = new ObservableField<>();
-    private ObservableField<List<Movie>> mUpComingMovies = new ObservableField<>();
-    private ObservableField<List<Movie>> mTopRateMovies = new ObservableField<>();
-    private ObservableField<List<Genre>> mGenres = new ObservableField<>();
+    public final ObservableList<Movie> popularMoviesObservable = new ObservableArrayList<>();
+    public final ObservableList<Movie> nowPlayingMoviesObservable = new ObservableArrayList<>();
+    public final ObservableList<Movie> upComingMoviesObservable = new ObservableArrayList<>();
+    public final ObservableList<Movie> topRateMoviesObservable = new ObservableArrayList<>();
+    public final ObservableList<Genre> genresObservable = new ObservableArrayList<>();
+
+
+    private HomeNavigator mNavigator;
 
     public HomeViewModel(MovieRepository movieRepository) {
         mMovieRepository = movieRepository;
@@ -65,7 +77,7 @@ public class HomeViewModel extends BaseObservable {
         Disposable disposable = mMovieRepository.getGenres()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(genres -> mGenres.set(genres)
+                .subscribe(genres -> genresObservable.addAll(genres)
                         , throwable -> handleError(throwable.getMessage()));
         mCompositeDisposable.add(disposable);
     }
@@ -75,7 +87,7 @@ public class HomeViewModel extends BaseObservable {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movies -> {
-                    mTopRateMovies.set(movies.subList(
+                    topRateMoviesObservable.addAll(movies.subList(
                             0,
                             movies.size() / Constans.SEPARATE_UNIT));
                     mMoreTopRateMovies.addAll(movies.subList(
@@ -90,7 +102,7 @@ public class HomeViewModel extends BaseObservable {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movies -> {
-                    mUpComingMovies.set(movies.subList(
+                    upComingMoviesObservable.addAll(movies.subList(
                             0,
                             movies.size() / Constans.SEPARATE_UNIT));
                     mMoreUpComingMovies.addAll(movies.subList(
@@ -105,7 +117,7 @@ public class HomeViewModel extends BaseObservable {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movies -> {
-                    mNowPlayingMovies.set(movies.subList(
+                    nowPlayingMoviesObservable.addAll(movies.subList(
                             0,
                             movies.size() / Constans.SEPARATE_UNIT));
                     mMoreNowPlayingMovies.addAll(movies.subList(
@@ -120,7 +132,7 @@ public class HomeViewModel extends BaseObservable {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movies -> {
-                    mPopularMovies.set(movies.subList(
+                    popularMoviesObservable.addAll(movies.subList(
                             0,
                             movies.size() / Constans.SEPARATE_UNIT));
                     mMorePopularMovies.addAll(movies.subList(
@@ -134,47 +146,28 @@ public class HomeViewModel extends BaseObservable {
         return mGenresLayoutManager;
     }
 
-    public void setGenresLayoutManager(LinearLayoutManager genresLayoutManager) {
-        mGenresLayoutManager = genresLayoutManager;
-    }
 
-    public ObservableField<List<Movie>> getPopularMovies() {
-        return mPopularMovies;
-    }
-
-    public ObservableField<List<Movie>> getNowPlayingMovies() {
-        return mNowPlayingMovies;
-    }
-
-    public ObservableField<List<Movie>> getTopRateMovies() {
-        return mTopRateMovies;
-    }
-
-    public ObservableField<List<Movie>> getUpComingMovies() {
-        return mUpComingMovies;
-    }
-
-    public ObservableField<List<Genre>> getGenres() {
-        return mGenres;
+    public void setNavigator(HomeNavigator navigator) {
+        mNavigator = navigator;
     }
 
     public void onClickLoadMoreNowPlaying(View view) {
-        mNowPlayingMovies.get().addAll(mMoreUpComingMovies);
+        nowPlayingMoviesObservable.addAll(mMoreNowPlayingMovies);
         mIsLoadMoreNowPlaying.set(true);
     }
 
     public void onClickLoadMorePopular(View view) {
-        mPopularMovies.get().addAll(mMorePopularMovies);
+        popularMoviesObservable.addAll(mMorePopularMovies);
         mIsLoadMorePopular.set(true);
     }
 
     public void onClickLoadMoreTopRate(View view) {
-        mTopRateMovies.get().addAll(mMoreTopRateMovies);
+        topRateMoviesObservable.addAll(mMoreTopRateMovies);
         mIsLoadMoreTopRate.set(true);
     }
 
     public void onClickLoadMoreUpComing(View view) {
-        mUpComingMovies.get().addAll(mMoreUpComingMovies);
+        upComingMoviesObservable.addAll(mMoreUpComingMovies);
         mIsLoadMoreUpComing.set(true);
     }
 
@@ -183,5 +176,13 @@ public class HomeViewModel extends BaseObservable {
     }
 
     private void handleError(String message) {
+    }
+
+    public void onCategoryClick(View view, String key, String name) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(BUNDLE_SOURCE, CATEGORY_SOURCE);
+        bundle.putString(BUNDLE_KEY, key);
+        bundle.putString(BUNDLE_NAME, name);
+        mNavigator.showMovies(bundle);
     }
 }
