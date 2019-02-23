@@ -22,4 +22,8 @@ public interface NameApi {
 
     @GET("/3/genre/movie/list")
     Single<GenreResult> getGenres();
+
+    @GET("/3/discover/movie")
+    Single<CategoryResult> getMoviesByGenre(@Query("page") int page,
+                                            @Query("with_genres") String genreId);
 }

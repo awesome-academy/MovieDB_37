@@ -50,4 +50,9 @@ public class MovieRepository implements MovieDataSource.Local,
     public Single<List<Genre>> getGenres() {
         return mMovieRemoteDataSource.getGenres();
     }
+
+    @Override
+    public Single<List<Movie>> getMoviesByGenre(int page, String genreId) {
+        return mMovieRemoteDataSource.getMoviesByGenre(page, genreId);
+    }
 }
