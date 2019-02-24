@@ -14,7 +14,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     private static final String EXTRAS_ARGS = "com.example.moviedb_37.extras.EXTRAS_ARGS";
 
-    public static Intent getMovieDetailsIntent(Context context, Movie movie) {
+    public static Intent getIntent(Context context, Movie movie) {
         Intent intent = new Intent(context, MovieDetailsActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString(BUNDLE_KEY, String.valueOf(movie.getId()));

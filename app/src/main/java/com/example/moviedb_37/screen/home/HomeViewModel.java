@@ -179,10 +179,7 @@ public class HomeViewModel extends BaseObservable {
     }
 
     public void onCategoryClick(View view, String key, String name) {
-        Bundle bundle = new Bundle();
-        bundle.putInt(BUNDLE_SOURCE, CATEGORY_SOURCE);
-        bundle.putString(BUNDLE_KEY, key);
-        bundle.putString(BUNDLE_NAME, name);
-        mNavigator.showMovies(bundle);
+        Genre genre = new Genre(key, name);
+        mNavigator.showMovies(genre, CATEGORY_SOURCE);
     }
 }
