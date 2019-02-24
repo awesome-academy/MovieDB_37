@@ -18,7 +18,7 @@ import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.repository.MovieRepository;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.FragmentHomeBinding;
-import com.example.moviedb_37.screen.movies.MovieDetailActivity;
+import com.example.moviedb_37.screen.movies.ListMovieCategoryActivity;
 
 import java.util.ArrayList;
 
@@ -93,7 +93,7 @@ public class HomeFragment extends Fragment implements HomeNavigator
 
     @Override
     public void showMovies(Bundle bundle) {
-        Intent intent = MovieDetailActivity.getMovieIntent(getActivity(), bundle);
+        Intent intent = ListMovieCategoryActivity.getMovieIntent(getActivity(), bundle);
         startActivity(intent);
     }
 
