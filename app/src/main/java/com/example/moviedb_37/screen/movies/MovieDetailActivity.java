@@ -3,14 +3,16 @@ package com.example.moviedb_37.screen.movies;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import com.example.moviedb_37.R;
 import com.example.moviedb_37.data.model.Movie;
+import com.example.moviedb_37.data.repository.MovieRepository;
+import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.ActivityMovieDetailBinding;
 import com.example.moviedb_37.screen.home.CategoryAdapter;
 import com.example.moviedb_37.screen.home.HomeViewModel;
@@ -31,6 +33,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Bundle bundle = getIntent().getBundleExtra(EXTRAS_ARGS);
         mViewModel = new MovieDetailViewModel(
+                MovieRepository.getInstance(MovieRemoteDataSource.getInstance()),
+
                 bundle.getInt(HomeViewModel.BUNDLE_SOURCE),
                 bundle.getString(HomeViewModel.BUNDLE_KEY));
 
@@ -96,5 +100,6 @@ public class MovieDetailActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mViewModel.clear();
     }
 }

@@ -3,9 +3,6 @@ package com.example.moviedb_37.data.source.remote;
 import com.example.moviedb_37.BuildConfig;
 import com.example.moviedb_37.data.model.Genre;
 import com.example.moviedb_37.data.model.Movie;
-
-import io.reactivex.functions.Function;
-
 import com.example.moviedb_37.data.source.MovieDataSource;
 import com.example.moviedb_37.data.source.remote.config.response.CategoryResult;
 import com.example.moviedb_37.data.source.remote.config.response.GenreResult;
@@ -15,6 +12,7 @@ import com.example.moviedb_37.data.source.remote.config.service.NameServiceClien
 import java.util.List;
 
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 
 public class MovieRemoteDataSource implements MovieDataSource.Remote {
 
@@ -84,5 +82,11 @@ public class MovieRemoteDataSource implements MovieDataSource.Remote {
                         return genreResult.getGenres();
                     }
                 });
+    }
+
+    @Override
+    public Single<List<Movie>> getMoviesByGenre(int page, String genreId) {
+        return mApi.getMoviesByGenre(page, genreId)
+                .map(categoryResult -> categoryResult.getMovies());
     }
 }

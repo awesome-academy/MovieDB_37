@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment implements HomeNavigator
         mTopRateAdapter = new CategoryAdapter(new ArrayList<Movie>(0));
         topRateRecycler.setAdapter(mTopRateAdapter);
 
-        RecyclerView genresRecycler = mBinding.recyclerGenres;
+        RecyclerView genresRecycler = mBinding.recyclerGenre;
         LinearLayoutManager genresLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.HORIZONTAL, false);
         genresRecycler.setLayoutManager(genresLayoutManager);
