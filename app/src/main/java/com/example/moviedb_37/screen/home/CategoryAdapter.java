@@ -16,6 +16,8 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private List<Movie> mMovies;
+    private ItemClickListener mItemClickListener;
+
 
     public CategoryAdapter(List<Movie> movies) {
         this.mMovies = movies;
@@ -30,7 +32,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 viewGroup,
                 false
         );
-        return new ViewHolder(binding);
+        return new ViewHolder(binding, mItemClickListener);
     }
 
     @Override
@@ -43,14 +45,19 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return mMovies != null ? mMovies.size() : 0;
     }
 
+    public CategoryAdapter setItemClickListener(ItemClickListener itemClickListener) {
+        mItemClickListener = itemClickListener;
+        return this;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private ItemMovieBinding mBinding;
         private ItemMovieListViewModel mItemMovieListViewModel;
 
-        public ViewHolder(ItemMovieBinding binding) {
+        public ViewHolder(ItemMovieBinding binding, ItemClickListener listener) {
             super(binding.getRoot());
             mBinding = binding;
-            mItemMovieListViewModel = new ItemMovieListViewModel();
+            mItemMovieListViewModel = new ItemMovieListViewModel(listener);
             mBinding.setViewModel(mItemMovieListViewModel);
         }
 
@@ -75,5 +82,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         mMovies.clear();
         mMovies.addAll(movies);
         notifyDataSetChanged();
+    }
+
+    public interface ItemClickListener {
+        void onMovieItemClick(Movie movie);
     }
 }

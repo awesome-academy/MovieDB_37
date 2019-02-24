@@ -11,16 +11,25 @@ import android.view.MenuItem;
 import android.widget.AbsListView;
 
 import com.example.moviedb_37.R;
+import com.example.moviedb_37.data.model.Genre;
 import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.repository.MovieRepository;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.ActivityListMovieCategoryBinding;
 import com.example.moviedb_37.screen.home.CategoryAdapter;
 import com.example.moviedb_37.screen.home.HomeViewModel;
+import com.example.moviedb_37.screen.moviedetails.MovieDetailsActivity;
 
 import java.util.ArrayList;
 
-public class ListMovieCategoryActivity extends AppCompatActivity {
+import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_KEY;
+import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_NAME;
+import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_SOURCE;
+import static com.example.moviedb_37.screen.home.HomeViewModel.CATEGORY_SOURCE;
+import static com.example.moviedb_37.screen.home.HomeViewModel.GENRE_SOURCE;
+
+public class ListMovieCategoryActivity extends AppCompatActivity implements MovieNavigator
+        , CategoryAdapter.ItemClickListener {
     private static final String EXTRAS_ARGS = "com.example.moviedb_37.extras.EXTRAS_ARGS";
 
     private ActivityListMovieCategoryBinding mBinding;
@@ -31,6 +40,20 @@ public class ListMovieCategoryActivity extends AppCompatActivity {
     private boolean isScrolling;
     private int currentItem, totalItem, scrolOutItem;
 
+    public static Intent getIntent(Context context, Genre genre, int getBy) {
+        Intent intent = new Intent(context, ListMovieCategoryActivity.class);
+        Bundle bundle = new Bundle();
+        if (getBy == GENRE_SOURCE) {
+            bundle.putInt(BUNDLE_SOURCE, GENRE_SOURCE);
+        } else {
+            bundle.putInt(BUNDLE_SOURCE, CATEGORY_SOURCE);
+        }
+        bundle.putString(BUNDLE_KEY, genre.getId());
+        bundle.putString(BUNDLE_NAME, genre.getName());
+        intent.putExtra(EXTRAS_ARGS, bundle);
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +62,7 @@ public class ListMovieCategoryActivity extends AppCompatActivity {
                 MovieRepository.getInstance(MovieRemoteDataSource.getInstance()),
 
                 bundle.getInt(HomeViewModel.BUNDLE_SOURCE),
-                bundle.getString(HomeViewModel.BUNDLE_KEY));
+                bundle.getString(BUNDLE_KEY));
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_list_movie_category);
         mBinding.setViewModel(mViewModel);
@@ -52,7 +75,7 @@ public class ListMovieCategoryActivity extends AppCompatActivity {
         genresRecycler.setLayoutManager(mLayoutManager);
         mAdapter = new CategoryAdapter(new ArrayList<Movie>(0));
         genresRecycler.setAdapter(mAdapter);
-
+        mAdapter.setItemClickListener(this);
         setupScrollListener(genresRecycler);
     }
 
@@ -94,15 +117,9 @@ public class ListMovieCategoryActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static Intent getMovieIntent(Context context, Bundle bundle) {
-        Intent intent = new Intent(context, ListMovieCategoryActivity.class);
-        intent.putExtra(EXTRAS_ARGS, bundle);
-        return intent;
-    }
-
     private String getTitleToolbar() {
         String title = "";
-        title = getIntent().getBundleExtra(EXTRAS_ARGS).getString(HomeViewModel.BUNDLE_NAME);
+        title = getIntent().getBundleExtra(EXTRAS_ARGS).getString(BUNDLE_NAME);
         return title;
     }
 
@@ -117,5 +134,15 @@ public class ListMovieCategoryActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mViewModel.clear();
+    }
+
+    @Override
+    public void onMovieItemClick(Movie movie) {
+        showMovieDetail(movie);
+    }
+
+    @Override
+    public void showMovieDetail(Movie movie) {
+        startActivity(MovieDetailsActivity.getIntent(this, movie));
     }
 }

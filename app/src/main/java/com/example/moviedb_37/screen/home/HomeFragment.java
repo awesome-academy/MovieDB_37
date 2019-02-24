@@ -18,17 +18,15 @@ import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.repository.MovieRepository;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.FragmentHomeBinding;
+import com.example.moviedb_37.screen.moviedetails.MovieDetailsActivity;
 import com.example.moviedb_37.screen.movies.ListMovieCategoryActivity;
 
 import java.util.ArrayList;
 
-import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_KEY;
-import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_NAME;
-import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_SOURCE;
 import static com.example.moviedb_37.screen.home.HomeViewModel.GENRE_SOURCE;
 
 public class HomeFragment extends Fragment implements HomeNavigator
-        , GenresAdapter.ItemClickListener {
+        , GenresAdapter.ItemClickListener, CategoryAdapter.ItemClickListener {
 
     private FragmentHomeBinding mBinding;
     private HomeViewModel mViewModel;
@@ -52,18 +50,22 @@ public class HomeFragment extends Fragment implements HomeNavigator
     private void setupAdapters() {
         RecyclerView popularRecycler = mBinding.recyclerPopular;
         mPopularAdapter = new CategoryAdapter(new ArrayList<Movie>(0));
+        mPopularAdapter.setItemClickListener(this);
         popularRecycler.setAdapter(mPopularAdapter);
 
         RecyclerView nowPlayingRecycler = mBinding.recyclerNowPlaying;
         mNowPlayingAdapter = new CategoryAdapter(new ArrayList<Movie>(0));
+        mNowPlayingAdapter.setItemClickListener(this);
         nowPlayingRecycler.setAdapter(mNowPlayingAdapter);
 
         RecyclerView upComingRecycler = mBinding.recyclerUpComing;
         mUpComingAdapter = new CategoryAdapter(new ArrayList<Movie>(0));
+        mUpComingAdapter.setItemClickListener(this);
         upComingRecycler.setAdapter(mUpComingAdapter);
 
         RecyclerView topRateRecycler = mBinding.recyclerTopRate;
         mTopRateAdapter = new CategoryAdapter(new ArrayList<Movie>(0));
+        mTopRateAdapter.setItemClickListener(this);
         topRateRecycler.setAdapter(mTopRateAdapter);
 
         RecyclerView genresRecycler = mBinding.recyclerGenre;
@@ -91,12 +93,6 @@ public class HomeFragment extends Fragment implements HomeNavigator
         mViewModel.clear();
     }
 
-    @Override
-    public void showMovies(Bundle bundle) {
-        Intent intent = ListMovieCategoryActivity.getMovieIntent(getActivity(), bundle);
-        startActivity(intent);
-    }
-
     private void setNavigator() {
         if (mViewModel != null) {
             mViewModel.setNavigator(this);
@@ -104,11 +100,24 @@ public class HomeFragment extends Fragment implements HomeNavigator
     }
 
     @Override
-    public void onItemClick(Genre genre) {
-        Bundle bundle = new Bundle();
-        bundle.putInt(BUNDLE_SOURCE, GENRE_SOURCE);
-        bundle.putString(BUNDLE_KEY, String.valueOf(genre.getId()));
-        bundle.putString(BUNDLE_NAME, genre.getName());
-        showMovies(bundle);
+    public void onGenreItemClick(Genre genre) {
+        showMovies(genre, GENRE_SOURCE);
+    }
+
+    @Override
+    public void showMovies(Genre genre, int getBy) {
+        Intent intent = ListMovieCategoryActivity.getIntent(getActivity(), genre, getBy);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showMovieDetail(Movie movie) {
+        startActivity(MovieDetailsActivity.getIntent(getActivity(), movie));
+    }
+
+    @Override
+    public void onMovieItemClick(Movie movie) {
+        showMovieDetail(movie);
+
     }
 }
