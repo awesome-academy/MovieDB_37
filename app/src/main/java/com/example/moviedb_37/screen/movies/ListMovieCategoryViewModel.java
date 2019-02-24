@@ -1,6 +1,7 @@
 package com.example.moviedb_37.screen.movies;
 
 import android.databinding.ObservableArrayList;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableList;
 
 import com.example.moviedb_37.data.model.CategoryKey;
@@ -14,21 +15,29 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class MovieDetailViewModel {
+public class ListMovieCategoryViewModel {
+    private int mLoadBy;
     private String mKey;
     public final ObservableList<Movie> moviesObservable = new ObservableArrayList<>();
     private MovieRepository mMovieRepository;
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     private int mCurrentPage;
+    public final ObservableBoolean isLoadMore = new ObservableBoolean(false);
 
-    public MovieDetailViewModel(MovieRepository movieRepository, int loadBy, String key) {
+    public ListMovieCategoryViewModel(MovieRepository movieRepository, int loadBy, String key) {
         mKey = key;
+        mLoadBy = loadBy;
         mMovieRepository = movieRepository;
         mCurrentPage = Constans.FIRST_PAGE;
-        loadMovies(loadBy);
+        isLoadMore.set(false);
+        loadMovies(mLoadBy);
     }
 
-    private void loadMovies(int loadBy) {
+    public int getLoadBy() {
+        return mLoadBy;
+    }
+
+    public void loadMovies(int loadBy) {
         if (loadBy == HomeViewModel.GENRE_SOURCE) {
             loadMoviesByGenre();
             return;
@@ -54,38 +63,42 @@ public class MovieDetailViewModel {
     }
 
     private void loadTopRateMovies() {
-        Disposable disposable = mMovieRepository.getTopRateMovies(Constans.FIRST_PAGE)
+        Disposable disposable = mMovieRepository.getTopRateMovies(mCurrentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movies -> moviesObservable.addAll(movies),
                         throwable -> handleError(throwable.getMessage()));
+        isLoadMore.set(false);
         mCompositeDisposable.add(disposable);
     }
 
     private void loadUpComingMovies() {
-        Disposable disposable = mMovieRepository.getUpComingMovies(Constans.FIRST_PAGE)
+        Disposable disposable = mMovieRepository.getUpComingMovies(mCurrentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movies -> moviesObservable.addAll(movies),
                         throwable -> handleError(throwable.getMessage()));
+        isLoadMore.set(false);
         mCompositeDisposable.add(disposable);
     }
 
     private void loadNowPlayingMovies() {
-        Disposable disposable = mMovieRepository.getNowPlayingMovies(Constans.FIRST_PAGE)
+        Disposable disposable = mMovieRepository.getNowPlayingMovies(mCurrentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movies -> moviesObservable.addAll(movies),
                         throwable -> handleError(throwable.getMessage()));
+        isLoadMore.set(false);
         mCompositeDisposable.add(disposable);
     }
 
     private void loadPopularMovies() {
-        Disposable disposable = mMovieRepository.getPopularMovies(Constans.FIRST_PAGE)
+        Disposable disposable = mMovieRepository.getPopularMovies(mCurrentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movies -> moviesObservable.addAll(movies),
                         throwable -> handleError(throwable.getMessage()));
+        isLoadMore.set(false);
         mCompositeDisposable.add(disposable);
     }
 
@@ -95,6 +108,7 @@ public class MovieDetailViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movies -> moviesObservable.addAll(movies),
                         throwable -> handleError(throwable.getMessage()));
+        isLoadMore.set(false);
         mCompositeDisposable.add(disposable);
     }
 
@@ -104,5 +118,10 @@ public class MovieDetailViewModel {
     }
 
     private void handleError(String message) {
+        isLoadMore.set(false);
+    }
+
+    public void increaseCurrentPage() {
+        mCurrentPage += Constans.INDEX_UNIT;
     }
 }

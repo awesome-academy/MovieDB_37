@@ -8,37 +8,40 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.widget.AbsListView;
 
 import com.example.moviedb_37.R;
 import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.repository.MovieRepository;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
-import com.example.moviedb_37.databinding.ActivityMovieDetailBinding;
+import com.example.moviedb_37.databinding.ActivityListMovieCategoryBinding;
 import com.example.moviedb_37.screen.home.CategoryAdapter;
 import com.example.moviedb_37.screen.home.HomeViewModel;
 
 import java.util.ArrayList;
 
-public class MovieDetailActivity extends AppCompatActivity {
+public class ListMovieCategoryActivity extends AppCompatActivity {
     private static final String EXTRAS_ARGS = "com.example.moviedb_37.extras.EXTRAS_ARGS";
 
-    private ActivityMovieDetailBinding mBinding;
+    private ActivityListMovieCategoryBinding mBinding;
     private CategoryAdapter mAdapter;
     private LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
 
-    private MovieDetailViewModel mViewModel;
+    private ListMovieCategoryViewModel mViewModel;
+    private boolean isScrolling;
+    private int currentItem, totalItem, scrolOutItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getIntent().getBundleExtra(EXTRAS_ARGS);
-        mViewModel = new MovieDetailViewModel(
+        mViewModel = new ListMovieCategoryViewModel(
                 MovieRepository.getInstance(MovieRemoteDataSource.getInstance()),
 
                 bundle.getInt(HomeViewModel.BUNDLE_SOURCE),
                 bundle.getString(HomeViewModel.BUNDLE_KEY));
 
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_detail);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_list_movie_category);
         mBinding.setViewModel(mViewModel);
         setupToolbar();
         setupAdapters();
@@ -57,11 +60,24 @@ public class MovieDetailActivity extends AppCompatActivity {
         genresRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    isScrolling = true;
+                }
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
+                super.onScrolled(recyclerView, dx, dy);
+                currentItem = mLayoutManager.getChildCount();
+                totalItem = mLayoutManager.getItemCount();
+                scrolOutItem = mLayoutManager.findFirstVisibleItemPosition();
+                if (isScrolling && (currentItem + scrolOutItem == totalItem)) {
+                    isScrolling = false;
+                    mViewModel.isLoadMore.set(true);
+                    mViewModel.increaseCurrentPage();
+                    mViewModel.loadMovies(mViewModel.getLoadBy());
+                }
             }
         });
     }
@@ -79,7 +95,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     public static Intent getMovieIntent(Context context, Bundle bundle) {
-        Intent intent = new Intent(context, MovieDetailActivity.class);
+        Intent intent = new Intent(context, ListMovieCategoryActivity.class);
         intent.putExtra(EXTRAS_ARGS, bundle);
         return intent;
     }
