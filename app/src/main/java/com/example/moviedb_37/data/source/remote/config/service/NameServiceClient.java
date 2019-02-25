@@ -17,7 +17,6 @@ public class NameServiceClient extends ServiceClient {
 
     public static NameApi getInstance() {
         if (sApiInstacne == null) {
-
             throw new IllegalStateException(StringUtil
                     .append(NameServiceClient.class.getSimpleName(),EXCEPTION_MESSAGE));
         }
