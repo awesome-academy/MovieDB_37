@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <import type="com.example.moviedb_37.data.model.CategoryKey" />
-
-    <import type="com.example.moviedb_37.data.model.CategoryName" />
-
     <data>
 
         <variable
             name="viewModel"
             type="com.example.moviedb_37.screen.home.HomeViewModel" />
+        <import type="com.example.moviedb_37.data.model.CategoryKey" />
+
+        <import type="com.example.moviedb_37.data.model.CategoryName" />
     </data>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/home_background">
@@ -34,8 +32,7 @@
                 android:layout_marginStart="@dimen/dp_8"
                 android:layout_marginLeft="@dimen/dp_8"
                 android:layout_marginTop="@dimen/dp_8"
-                android:onClick="@{(view) -> viewModel.onCategoryClick(view
-                , CategoryKey.CATEGORY_POPULAR, CategoryName.CATEGORY_POPULAR)}"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_POPULAR, CategoryName.CATEGORY_POPULAR)}"
                 android:text="@string/title_popular"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textColor="@color/color_blue"
@@ -47,8 +44,7 @@
                 android:id="@+id/image_next_popular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{(view) -> viewModel.onCategoryClick(view
-                ,CategoryKey.CATEGORY_POPULAR, CategoryName.CATEGORY_POPULAR)}"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view,CategoryKey.CATEGORY_POPULAR, CategoryName.CATEGORY_POPULAR)}"
                 android:paddingStart="@dimen/dp_8"
                 android:paddingLeft="@dimen/dp_8"
                 android:src="@drawable/ic_next"

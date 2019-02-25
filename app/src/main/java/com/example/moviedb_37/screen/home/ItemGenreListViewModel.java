@@ -26,4 +26,8 @@ public class ItemGenreListViewModel extends BaseObservable {
         }
         mItemClickListener.onGenreItemClick(mGenreObserverField.get());
     }
+
+    public ObservableField<Genre> getGenreObserverField() {
+        return mGenreObserverField;
+    }
 }
