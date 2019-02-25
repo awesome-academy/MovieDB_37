@@ -15,10 +15,7 @@ import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.repository.MovieRepository;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.ActivityMovieDetailsBinding;
-import com.example.moviedb_37.screen.actors.ActorFragment;
-import com.example.moviedb_37.screen.movieinfo.InfoFragment;
-import com.example.moviedb_37.screen.producer.ProducerFragment;
-import com.example.moviedb_37.screen.trailer.TrailerFragment;
+import com.example.moviedb_37.screen.movieinfo.InfoMovieFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,15 +51,11 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private void initViews() {
         ViewPager viewPager = findViewById(R.id.view_pager);
         MainPagerAdapter pagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(new InfoFragment(),
-                getString(R.string.tab_title_information));
-        pagerAdapter.addFragment(new ActorFragment(),
-                getString(R.string.tab_title_actor));
-        pagerAdapter.addFragment(new TrailerFragment(),
-                getString(R.string.tab_title_trailer));
-        pagerAdapter.addFragment(new ProducerFragment(),
-                getString(R.string.tab_title_producer));
-        viewPager.setAdapter(pagerAdapter);
+
+        InfoMovieFragment infoMovieFragment = new InfoMovieFragment();
+        infoMovieFragment.setViewModel(mViewModel);
+        pagerAdapter.addFragment(infoMovieFragment, getString(R.string.tab_title_information));
+
     }
 
     public static class MainPagerAdapter extends FragmentPagerAdapter {
