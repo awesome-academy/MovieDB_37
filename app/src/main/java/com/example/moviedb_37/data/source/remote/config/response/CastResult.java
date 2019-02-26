@@ -1,6 +1,6 @@
 package com.example.moviedb_37.data.source.remote.config.response;
 
-import com.example.moviedb_37.data.model.Cast;
+import com.example.moviedb_37.data.model.Actor;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,14 +9,14 @@ import java.util.List;
 public class CastResult {
     @SerializedName("cast")
     @Expose
-    private List<Cast> mCasts;
+    private List<Actor> mActors;
 
-    public List<Cast> getCasts() {
-        return mCasts;
+    public List<Actor> getActors() {
+        return mActors;
     }
 
-    public CastResult setCasts(List<Cast> casts) {
-        mCasts = casts;
+    public CastResult setActors(List<Actor> actors) {
+        mActors = actors;
         return this;
     }
 }

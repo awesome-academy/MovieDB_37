@@ -3,7 +3,7 @@ package com.example.moviedb_37.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Cast {
+public class Actor {
     @SerializedName("cast_id")
     @Expose
     private int mCastId;
@@ -20,7 +20,7 @@ public class Cast {
     @Expose
     private String mProfilePath;
 
-    public Cast(int castId, String creditId, int id, String name, String profilePath) {
+    public Actor(int castId, String creditId, int id, String name, String profilePath) {
         mCastId = castId;
         mCreditId = creditId;
         mId = id;
@@ -32,7 +32,7 @@ public class Cast {
         return mCastId;
     }
 
-    public Cast setCastId(int castId) {
+    public Actor setCastId(int castId) {
         mCastId = castId;
         return this;
     }
@@ -41,7 +41,7 @@ public class Cast {
         return mCreditId;
     }
 
-    public Cast setCreditId(String creditId) {
+    public Actor setCreditId(String creditId) {
         mCreditId = creditId;
         return this;
     }
@@ -50,7 +50,7 @@ public class Cast {
         return mId;
     }
 
-    public Cast setId(int id) {
+    public Actor setId(int id) {
         mId = id;
         return this;
     }
@@ -59,7 +59,7 @@ public class Cast {
         return mName;
     }
 
-    public Cast setName(String name) {
+    public Actor setName(String name) {
         mName = name;
         return this;
     }
@@ -68,7 +68,7 @@ public class Cast {
         return mProfilePath;
     }
 
-    public Cast setProfilePath(String profilePath) {
+    public Actor setProfilePath(String profilePath) {
         mProfilePath = profilePath;
         return this;
     }

@@ -15,6 +15,7 @@ import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.repository.MovieRepository;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.ActivityMovieDetailsBinding;
+import com.example.moviedb_37.screen.actors.ActorFragment;
 import com.example.moviedb_37.screen.movieinfo.InfoMovieFragment;
 
 import java.util.ArrayList;
@@ -56,6 +57,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
         infoMovieFragment.setViewModel(mViewModel);
         pagerAdapter.addFragment(infoMovieFragment, getString(R.string.tab_title_information));
 
+        ActorFragment actorsFragment = new ActorFragment();
+        actorsFragment.setViewModel(mViewModel);
+        pagerAdapter.addFragment(actorsFragment, getString(R.string.tab_title_actor));
     }
 
     public static class MainPagerAdapter extends FragmentPagerAdapter {
