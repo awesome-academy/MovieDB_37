@@ -8,7 +8,7 @@ import com.example.moviedb_37.data.repository.MovieRepository;
 import io.reactivex.disposables.CompositeDisposable;
 
 public class MovieDetailsViewModel {
-    public final ObservableField<Movie> mMovieObservable = new ObservableField<>();
+    public final ObservableField<Movie> movieObservable = new ObservableField<>();
     private MovieRepository mMovieRepository;
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
@@ -21,6 +21,6 @@ public class MovieDetailsViewModel {
     }
 
     public Movie getMovie() {
-        return mMovieObservable.get();
+        return movieObservable.get();
     }
 }
