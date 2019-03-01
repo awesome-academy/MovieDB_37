@@ -21,15 +21,16 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_30"
             android:paddingStart="@dimen/dp_16"
+            android:paddingLeft="@dimen/dp_16"
             android:src="@drawable/ic_arrow_down_white"
+            android:onClick="@{() -> viewModel.back()}"
             app:layout_constraintBottom_toTopOf="@+id/player"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingLeft="@dimen/dp_16" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <fragment
             android:id="@+id/player"
-            android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+            android:name="com.example.moviedb_37.screen.moviedetails.YoutubeVideoFragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"

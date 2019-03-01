@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".screen.moviedetails.MovieDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/MovieDetail" />
         <activity android:name=".screen.movies.ListMovieCategoryActivity" />
         <activity android:name=".screen.main.MainActivity">
