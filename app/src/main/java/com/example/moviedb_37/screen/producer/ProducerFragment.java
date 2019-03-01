@@ -14,7 +14,7 @@ import com.example.moviedb_37.screen.BaseFragment;
 
 import java.util.ArrayList;
 
-public class ProducerFragment extends BaseFragment {
+public class ProducerFragment extends BaseFragment implements ProducerAdapter.ItemClickListener {
     private FragmentProducerBinding mBinding;
 
     @Nullable
@@ -24,7 +24,14 @@ public class ProducerFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_producer, container, false);
         mBinding = FragmentProducerBinding.bind(view);
         mBinding.setViewModel(mViewModel);
-        setupAdapters(mBinding.recyclerProducer,new ProducerAdapter(new ArrayList<Company>()));
+        ProducerAdapter adapter = new ProducerAdapter(new ArrayList<Company>());
+        adapter.setItemClickListener(this);
+        setupAdapters(mBinding.recyclerProducer, adapter);
         return view;
+    }
+
+    @Override
+    public void onProduceItemClick(Company company) {
+
     }
 }

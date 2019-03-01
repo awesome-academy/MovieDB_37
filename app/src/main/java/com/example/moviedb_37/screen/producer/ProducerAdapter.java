@@ -14,6 +14,7 @@ import java.util.List;
 
 public class ProducerAdapter extends RecyclerView.Adapter<ProducerAdapter.ViewHolder> {
     private List<Company> mCompanies;
+    private ItemClickListener mItemClickListener;
 
     public ProducerAdapter(List<Company> companies) {
         mCompanies = companies;
@@ -28,7 +29,7 @@ public class ProducerAdapter extends RecyclerView.Adapter<ProducerAdapter.ViewHo
                 viewGroup,
                 false
         );
-        return new ViewHolder(binding);
+        return new ViewHolder(binding, mItemClickListener);
     }
 
     @Override
@@ -41,6 +42,11 @@ public class ProducerAdapter extends RecyclerView.Adapter<ProducerAdapter.ViewHo
         return mCompanies != null ? mCompanies.size() : 0;
     }
 
+    public ProducerAdapter setItemClickListener(ItemClickListener itemClickListener) {
+        mItemClickListener = itemClickListener;
+        return this;
+    }
+
     public void replaceData(List<Company> companies) {
         mCompanies.clear();
         mCompanies.addAll(companies);
@@ -51,10 +57,10 @@ public class ProducerAdapter extends RecyclerView.Adapter<ProducerAdapter.ViewHo
         private ItemProducerBinding mBinding;
         private ItemProducerViewModel mItemProduceViewModel;
 
-        public ViewHolder(ItemProducerBinding binding) {
+        public ViewHolder(ItemProducerBinding binding, ItemClickListener listener) {
             super(binding.getRoot());
             mBinding = binding;
-            mItemProduceViewModel = new ItemProducerViewModel();
+            mItemProduceViewModel = new ItemProducerViewModel(listener);
             mBinding.setViewModel(mItemProduceViewModel);
         }
 
@@ -64,4 +70,7 @@ public class ProducerAdapter extends RecyclerView.Adapter<ProducerAdapter.ViewHo
         }
     }
 
+    public interface ItemClickListener {
+        void onProduceItemClick(Company company);
+    }
 }

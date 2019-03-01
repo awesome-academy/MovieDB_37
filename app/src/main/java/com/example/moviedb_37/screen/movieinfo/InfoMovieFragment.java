@@ -15,7 +15,8 @@ import com.example.moviedb_37.screen.BaseFragment;
 
 import java.util.ArrayList;
 
-public class InfoMovieFragment extends BaseFragment {
+public class InfoMovieFragment extends BaseFragment
+        implements GenresDetailMovieAdapter.ItemClickListener, InfoNavigator {
     private FragmentInfoBinding mBinding;
 
     @Nullable
@@ -26,9 +27,19 @@ public class InfoMovieFragment extends BaseFragment {
         mBinding.setViewModel(mViewModel);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.HORIZONTAL, false);
-        setupAdapters(mBinding.recyclerGenre,
-                new GenresDetailMovieAdapter(new ArrayList<Genre>()),
-                layoutManager);
+        GenresDetailMovieAdapter adapter = new GenresDetailMovieAdapter(new ArrayList<Genre>());
+        adapter.setItemClickListener(this);
+        setupAdapters(mBinding.recyclerGenre, adapter, layoutManager);
         return view;
+    }
+
+    @Override
+    public void onGenreItemClick(Genre genre) {
+
+    }
+
+    @Override
+    public void showMovies(Genre genre, int getBy) {
+
     }
 }
