@@ -7,10 +7,19 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.moviedb_37.R;
+import com.example.moviedb_37.data.model.Actor;
+import com.example.moviedb_37.data.model.Company;
 import com.example.moviedb_37.data.model.Genre;
 import com.example.moviedb_37.data.model.Movie;
+import com.example.moviedb_37.data.model.Video;
+import com.example.moviedb_37.screen.actors.ActorsAdapter;
 import com.example.moviedb_37.screen.home.CategoryAdapter;
 import com.example.moviedb_37.screen.home.GenresAdapter;
+import com.example.moviedb_37.screen.movieinfo.GenresDetailMovieAdapter;
+import com.example.moviedb_37.screen.producer.ProducerAdapter;
+import com.example.moviedb_37.screen.trailer.TrailerAdapter;
 import com.example.moviedb_37.util.StringUtil;
 
 import java.util.List;
@@ -69,6 +78,58 @@ public class BindingUtils {
     public static void setScaleType(ImageView imageView, String backdropPath) {
         if (backdropPath.isEmpty() || backdropPath == null) {
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
+    }
+
+    @BindingAdapter("bindImage")
+    public static void setRoundedImage(ImageView imageView, String url) {
+        if (url == null || url.isEmpty()) {
+            imageView.setImageResource(R.drawable.ic_my_movie);
+            return;
+        }
+        String imageLink = StringUtil.getImageLink(IMAGE_SIZE_200, url);
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(R.drawable.ic_my_movie);
+        requestOptions.error(R.drawable.ic_my_movie);
+        Glide.with(imageView.getContext())
+                .load(imageLink)
+                .apply(requestOptions.circleCropTransform())
+                .into(imageView);
+    }
+
+    @BindingAdapter("app:bindProduces")
+    public static void setProducesForRecyclerView(RecyclerView recyclerView,
+                                                  List<Company> companies) {
+        ProducerAdapter adapter = (ProducerAdapter) recyclerView.getAdapter();
+        if (adapter != null && companies != null) {
+            adapter.replaceData(companies);
+        }
+    }
+
+    @BindingAdapter("app:bindVideos")
+    public static void setVideosForRecyclerView(RecyclerView recyclerView,
+                                                List<Video> videos) {
+        TrailerAdapter adapter = (TrailerAdapter) recyclerView.getAdapter();
+        if (adapter != null && videos != null) {
+            adapter.replaceData(videos);
+        }
+    }
+
+    @BindingAdapter("app:bindActors")
+    public static void setActorsForRecyclerView(RecyclerView recyclerView,
+                                                List<Actor> actors) {
+        ActorsAdapter adapter = (ActorsAdapter) recyclerView.getAdapter();
+        if (adapter != null && actors != null) {
+            adapter.replaceData(actors);
+        }
+    }
+
+    @BindingAdapter("app:bindGenresDetail")
+    public static void setGenresDetailForRecyclerView(RecyclerView recyclerView,
+                                                      List<Genre> genres) {
+        GenresDetailMovieAdapter adapter = (GenresDetailMovieAdapter) recyclerView.getAdapter();
+        if (adapter != null && genres != null) {
+            adapter.replaceData(genres);
         }
     }
 }

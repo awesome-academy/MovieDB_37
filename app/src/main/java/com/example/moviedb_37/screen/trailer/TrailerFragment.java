@@ -8,8 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.moviedb_37.R;
+import com.example.moviedb_37.data.model.Video;
 import com.example.moviedb_37.databinding.FragmentTrailerBinding;
 import com.example.moviedb_37.screen.BaseFragment;
+
+import java.util.ArrayList;
 
 public class TrailerFragment extends BaseFragment {
     private FragmentTrailerBinding mBinding;
@@ -21,8 +24,7 @@ public class TrailerFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_trailer, container, false);
         mBinding = FragmentTrailerBinding.bind(view);
         mBinding.setViewModel(mViewModel);
-        setupAdapters(mBinding.recyclerTrailer,
-                new TrailerAdapter(mViewModel.getMovie().getVideoResult().getVideos()));
+        setupAdapters(mBinding.recyclerTrailer, new TrailerAdapter(new ArrayList<Video>()));
         return view;
     }
 }

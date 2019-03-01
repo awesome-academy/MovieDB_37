@@ -41,6 +41,12 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.ViewHold
         return mVideos != null ? mVideos.size() : 0;
     }
 
+    public void replaceData(List<Video> videos) {
+        mVideos.clear();
+        mVideos.addAll(videos);
+        notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private ItemTrailerMovieBinding mBinding;
         private ItemTrailerViewModel mItemTrailerViewModel;
@@ -57,4 +63,5 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.ViewHold
             mBinding.executePendingBindings();
         }
     }
+
 }

@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/text_movie_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginLeft="@dimen/dp_16"
@@ -28,6 +28,8 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/dp_16"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/image_favorite"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,9 +63,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_30"
+            android:text="@{viewModel.movieObservable.overview}"
             android:textColor="@android:color/white"
             android:textSize="@dimen/dp_12"
-            android:text="@{viewModel.movieObservable.overview}"
             app:layout_constraintBottom_toTopOf="@+id/recycler_genre"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,11 +75,11 @@
             android:id="@+id/recycler_genre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:bindGenresDetail="@{viewModel.movieObservable.genres}"
             android:layout_marginTop="@dimen/dp_8"
+            app:bindGenresDetail="@{viewModel.movieObservable.genres}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:spanCount="3"
-            app:layout_constraintTop_toBottomOf="@id/text_movie_overview" />
+            app:layout_constraintTop_toBottomOf="@id/text_movie_overview"
+            app:spanCount="3" />
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -1,10 +1,12 @@
 package com.example.moviedb_37.data.source.remote.config.service;
 
+import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.source.remote.config.response.CategoryResult;
 import com.example.moviedb_37.data.source.remote.config.response.GenreResult;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface NameApi {
@@ -26,4 +28,8 @@ public interface NameApi {
     @GET("/3/discover/movie")
     Single<CategoryResult> getMoviesByGenre(@Query("page") int page,
                                             @Query("with_genres") String genreId);
+
+    @GET("/3/movie/{id}")
+    Single<Movie> getMovieDetail(@Path("id") int movieId,
+                                 @Query("append_to_response") String apend);
 }

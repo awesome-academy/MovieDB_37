@@ -42,6 +42,12 @@ public class GenresDetailMovieAdapter extends
         return mGenres != null ? mGenres.size() : 0;
     }
 
+    public void replaceData(List<Genre> genres) {
+        mGenres.clear();
+        mGenres.addAll(genres);
+        notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private ItemGenreDetailMovieBinding mBinding;
         private ItemGenreDetailViewModel mItemGenreDetailViewModel;

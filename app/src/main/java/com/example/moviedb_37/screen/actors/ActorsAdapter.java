@@ -41,6 +41,13 @@ public class ActorsAdapter extends RecyclerView.Adapter<ActorsAdapter.ViewHolder
         return mActors != null ? mActors.size() : 0;
     }
 
+
+    public void replaceData(List<Actor> actors) {
+        mActors.clear();
+        mActors.addAll(actors);
+        notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private ItemActorInfoBinding mBinding;
         private ItemActorsViewModel mItemActorsViewModel;
