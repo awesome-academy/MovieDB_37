@@ -8,8 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.moviedb_37.R;
+import com.example.moviedb_37.data.model.Company;
 import com.example.moviedb_37.databinding.FragmentProducerBinding;
 import com.example.moviedb_37.screen.BaseFragment;
+
+import java.util.ArrayList;
 
 public class ProducerFragment extends BaseFragment {
     private FragmentProducerBinding mBinding;
@@ -21,8 +24,7 @@ public class ProducerFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_producer, container, false);
         mBinding = FragmentProducerBinding.bind(view);
         mBinding.setViewModel(mViewModel);
-        setupAdapters(mBinding.recyclerProducer,
-                new ProducerAdapter(mViewModel.getMovie().getProductionCompanies()));
+        setupAdapters(mBinding.recyclerProducer,new ProducerAdapter(new ArrayList<Company>()));
         return view;
     }
 }

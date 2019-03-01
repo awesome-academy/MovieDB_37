@@ -100,4 +100,10 @@ public class MovieDetailsActivity extends AppCompatActivity {
             mTitles.add(title);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mViewModel.clear();
+    }
 }

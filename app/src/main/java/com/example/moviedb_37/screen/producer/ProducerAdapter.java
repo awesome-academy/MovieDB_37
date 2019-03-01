@@ -41,6 +41,12 @@ public class ProducerAdapter extends RecyclerView.Adapter<ProducerAdapter.ViewHo
         return mCompanies != null ? mCompanies.size() : 0;
     }
 
+    public void replaceData(List<Company> companies) {
+        mCompanies.clear();
+        mCompanies.addAll(companies);
+        notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private ItemProducerBinding mBinding;
         private ItemProducerViewModel mItemProduceViewModel;
@@ -57,4 +63,5 @@ public class ProducerAdapter extends RecyclerView.Adapter<ProducerAdapter.ViewHo
             mBinding.executePendingBindings();
         }
     }
+
 }
