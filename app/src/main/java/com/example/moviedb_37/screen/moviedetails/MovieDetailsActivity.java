@@ -17,6 +17,7 @@ import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.ActivityMovieDetailsBinding;
 import com.example.moviedb_37.screen.actors.ActorFragment;
 import com.example.moviedb_37.screen.movieinfo.InfoMovieFragment;
+import com.example.moviedb_37.screen.movies.MovieNavigator;
 import com.example.moviedb_37.screen.producer.ProducerFragment;
 import com.example.moviedb_37.screen.trailer.TrailerFragment;
 
@@ -25,12 +26,16 @@ import java.util.List;
 
 import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_KEY;
 
-public class MovieDetailsActivity extends AppCompatActivity {
+public class MovieDetailsActivity extends AppCompatActivity implements
+        OnChangeVideoListener , MovieDetailNavigator {
 
     private static final String EXTRAS_ARGS = "com.example.moviedb_37.extras.EXTRAS_ARGS";
 
     private MovieDetailsViewModel mViewModel;
     private ActivityMovieDetailsBinding mBinding;
+    private YoutubeVideoFragment mYouTubeVideoFragment;
+    private String mMovieId;
+
 
     public static Intent getIntent(Context context, Movie movie) {
         Intent intent = new Intent(context, MovieDetailsActivity.class);
@@ -43,12 +48,15 @@ public class MovieDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new MovieDetailsViewModel(0
+        mMovieId = getIntent().getBundleExtra(EXTRAS_ARGS).getString(BUNDLE_KEY);
+        mViewModel = new MovieDetailsViewModel(Integer.valueOf(mMovieId)
                 , MovieRepository.getInstance(MovieRemoteDataSource.getInstance()));
+        mViewModel.setOnChangeVideoListener(this);
+        mViewModel.setNavigator(this);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_details);
         mBinding.setViewModel(mViewModel);
-
         initViews();
+        mYouTubeVideoFragment = (YoutubeVideoFragment) getFragmentManager().findFragmentById(R.id.player);
     }
 
     private void initViews() {
@@ -70,6 +78,16 @@ public class MovieDetailsActivity extends AppCompatActivity {
         ProducerFragment produceFragment = new ProducerFragment();
         produceFragment.setViewModel(mViewModel);
         pagerAdapter.addFragment(produceFragment, getString(R.string.tab_title_producer));
+    }
+
+    @Override
+    public void setVideoId(String videoId) {
+        mYouTubeVideoFragment.setVideoId(videoId);
+    }
+
+    @Override
+    public void back() {
+        this.finish();
     }
 
     public static class MainPagerAdapter extends FragmentPagerAdapter {

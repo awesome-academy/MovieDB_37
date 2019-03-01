@@ -16,17 +16,37 @@ public class MovieDetailsViewModel {
     private MovieRepository mMovieRepository;
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
+    private OnChangeVideoListener mOnChangeVideoListener;
+    private MovieDetailNavigator mNavigator;
+
     public MovieDetailsViewModel(int movieId, MovieRepository movieRepository) {
         mMovieRepository = movieRepository;
         loadMovies(movieId);
+    }
+
+    public void setNavigator(MovieDetailNavigator navigator) {
+        mNavigator = navigator;
+    }
+
+    public void back() {
+        mNavigator.back();
+    }
+
+    public void setOnChangeVideoListener(OnChangeVideoListener listener) {
+        mOnChangeVideoListener = listener;
     }
 
     private void loadMovies(final int movieId) {
         Disposable disposable = mMovieRepository.getMovieDetail(movieId, APPEND_TO_MOVIE_DETAIL)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(movie -> movieObservable.set(movie)
-                        , throwable -> handleError(throwable.getMessage()));
+                .subscribe(movie -> {
+                    movieObservable.set(movie);
+                    if (movie.getVideoResult().getVideos().size() > 0) {
+                        mOnChangeVideoListener.setVideoId(
+                                movie.getVideoResult().getVideos().get(0).getKey());
+                    }
+                }, throwable -> handleError(throwable.getMessage()));
         mCompositeDisposable.add(disposable);
     }
 
