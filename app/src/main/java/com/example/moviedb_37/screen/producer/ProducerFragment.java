@@ -1,5 +1,6 @@
 package com.example.moviedb_37.screen.producer;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 
 public class ProducerFragment extends BaseFragment implements ProducerAdapter.ItemClickListener {
     private FragmentProducerBinding mBinding;
+    private OnProduceSelectedListener mListener;
 
     @Nullable
     @Override
@@ -31,7 +33,24 @@ public class ProducerFragment extends BaseFragment implements ProducerAdapter.It
     }
 
     @Override
-    public void onProduceItemClick(Company company) {
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (OnProduceSelectedListener) context;
+        } catch (ClassCastException e) {
+            handleError(e.getMessage());
+        }
+    }
 
+    @Override
+    public void onProduceItemClick(Company company) {
+        mListener.onProduceSelected(company);
+    }
+
+    public interface OnProduceSelectedListener {
+        public void onProduceSelected(Company company);
+    }
+
+    private void handleError(String message) {
     }
 }

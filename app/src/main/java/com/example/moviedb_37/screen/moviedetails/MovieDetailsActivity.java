@@ -11,13 +11,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.moviedb_37.R;
+import com.example.moviedb_37.data.model.Actor;
+import com.example.moviedb_37.data.model.Company;
+import com.example.moviedb_37.data.model.Genre;
 import com.example.moviedb_37.data.model.Movie;
+import com.example.moviedb_37.data.model.Video;
 import com.example.moviedb_37.data.repository.MovieRepository;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.ActivityMovieDetailsBinding;
 import com.example.moviedb_37.screen.actors.ActorFragment;
 import com.example.moviedb_37.screen.movieinfo.InfoMovieFragment;
-import com.example.moviedb_37.screen.movies.MovieNavigator;
+import com.example.moviedb_37.screen.movies.ListMovieCategoryActivity;
 import com.example.moviedb_37.screen.producer.ProducerFragment;
 import com.example.moviedb_37.screen.trailer.TrailerFragment;
 
@@ -25,9 +29,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_KEY;
+import static com.example.moviedb_37.screen.home.HomeViewModel.PRODUCE_SOURCE;
 
 public class MovieDetailsActivity extends AppCompatActivity implements
-        OnChangeVideoListener , MovieDetailNavigator {
+        OnChangeVideoListener, MovieDetailNavigator
+        , ProducerFragment.OnProduceSelectedListener {
 
     private static final String EXTRAS_ARGS = "com.example.moviedb_37.extras.EXTRAS_ARGS";
 
@@ -88,6 +94,32 @@ public class MovieDetailsActivity extends AppCompatActivity implements
     @Override
     public void back() {
         this.finish();
+    }
+
+    @Override
+    public void showMovies(Actor actor, int getBy) {
+
+    }
+
+    @Override
+    public void showMovies(Genre genre, int getBy) {
+
+    }
+
+    @Override
+    public void showMovies(Video video, int getBy) {
+
+    }
+
+    @Override
+    public void onProduceSelected(Company company) {
+        showMovies(company, PRODUCE_SOURCE);
+    }
+
+    @Override
+    public void showMovies(Company company, int getBy) {
+        Genre genre = new Genre(String.valueOf(company.getId()), company.getName());
+        startActivity(ListMovieCategoryActivity.getIntent(this, genre, getBy));
     }
 
     public static class MainPagerAdapter extends FragmentPagerAdapter {
