@@ -4,6 +4,7 @@ import android.databinding.ObservableField;
 
 import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.repository.MovieRepository;
+import com.example.moviedb_37.screen.producer.ProducerNavigator;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -17,7 +18,9 @@ public class MovieDetailsViewModel {
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     private OnChangeVideoListener mOnChangeVideoListener;
-    private MovieDetailNavigator mNavigator;
+    private MovieDetailNavigator mMovieDetailNavigator;
+
+    private ProducerNavigator mProduceNavigator;
 
     public MovieDetailsViewModel(int movieId, MovieRepository movieRepository) {
         mMovieRepository = movieRepository;
@@ -25,11 +28,15 @@ public class MovieDetailsViewModel {
     }
 
     public void setNavigator(MovieDetailNavigator navigator) {
-        mNavigator = navigator;
+        mMovieDetailNavigator = navigator;
+    }
+
+    public void setProduceNavigator(ProducerNavigator produceNavigator) {
+        mProduceNavigator = produceNavigator;
     }
 
     public void back() {
-        mNavigator.back();
+        mMovieDetailNavigator.back();
     }
 
     public void setOnChangeVideoListener(OnChangeVideoListener listener) {

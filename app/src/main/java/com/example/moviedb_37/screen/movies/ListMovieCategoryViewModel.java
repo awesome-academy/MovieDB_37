@@ -10,9 +10,12 @@ import com.example.moviedb_37.data.repository.MovieRepository;
 import com.example.moviedb_37.screen.home.HomeViewModel;
 import com.example.moviedb_37.util.Constans;
 
+import java.util.List;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class ListMovieCategoryViewModel {
@@ -42,7 +45,22 @@ public class ListMovieCategoryViewModel {
             loadMoviesByGenre();
             return;
         }
+        if (loadBy == HomeViewModel.PRODUCE_SOURCE) {
+            loadMoviesByProduce();
+            return;
+        }
         loadMoviesByCategory();
+    }
+
+    private void loadMoviesByProduce() {
+        Disposable disposable = mMovieRepository.getMoviesByProduce(mCurrentPage, mKey)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(movies -> {
+                    moviesObservable.addAll(movies);
+                    isLoadMore.set(false);
+                }, throwable -> handleError(throwable.getMessage()));
+        mCompositeDisposable.add(disposable);
     }
 
     private void loadMoviesByCategory() {

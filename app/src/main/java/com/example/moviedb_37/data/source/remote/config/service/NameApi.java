@@ -32,4 +32,8 @@ public interface NameApi {
     @GET("/3/movie/{id}")
     Single<Movie> getMovieDetail(@Path("id") int movieId,
                                  @Query("append_to_response") String apend);
+
+    @GET("/3/discover/movie")
+    Single<CategoryResult> getMoviesByProduce(@Query("page") int page,
+                                              @Query("with_companies") String companyId);
 }
