@@ -22,6 +22,7 @@ import com.example.moviedb_37.screen.moviedetails.MovieDetailsActivity;
 
 import java.util.ArrayList;
 
+import static com.example.moviedb_37.screen.home.HomeViewModel.ACTOR_SOURCE;
 import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_KEY;
 import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_NAME;
 import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_SOURCE;
@@ -46,6 +47,8 @@ public class ListMovieCategoryActivity extends AppCompatActivity implements Movi
         Bundle bundle = new Bundle();
         if (getBy == GENRE_SOURCE) {
             bundle.putInt(BUNDLE_SOURCE, GENRE_SOURCE);
+        } else if (getBy == ACTOR_SOURCE) {
+            bundle.putInt(BUNDLE_SOURCE, ACTOR_SOURCE);
         } else if (getBy == PRODUCE_SOURCE) {
             bundle.putInt(BUNDLE_SOURCE, PRODUCE_SOURCE);
         } else {

@@ -100,4 +100,11 @@ public class MovieRemoteDataSource implements MovieDataSource.Remote {
         return mApi.getMoviesByProduce(page, produceId)
                 .map(categoryResult -> categoryResult.getMovies());
     }
+
+    @Override
+    public Single<List<Movie>> getMoviesByActor(int page, String actorId) {
+        return mApi.getMoviesByActor(page, actorId)
+                .map(categoryResult -> categoryResult.getMovies());
+
+    }
 }

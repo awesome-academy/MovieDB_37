@@ -1,5 +1,6 @@
 package com.example.moviedb_37.screen.actors;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,17 @@ import java.util.ArrayList;
 
 public class ActorFragment extends BaseFragment implements ActorsAdapter.ItemClickListener {
     private FragmentActorBinding mBinding;
+    private OnActorSelectedListener mListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (OnActorSelectedListener) context;
+        } catch (ClassCastException e) {
+            handleError(e.getMessage());
+        }
+    }
 
     @Nullable
     @Override
@@ -30,5 +42,13 @@ public class ActorFragment extends BaseFragment implements ActorsAdapter.ItemCli
 
     @Override
     public void onActorItemClick(Actor actor) {
+        mListener.onActorSelected(actor);
+    }
+
+    public interface OnActorSelectedListener {
+        public void onActorSelected(Actor actor);
+    }
+
+    private void handleError(String message) {
     }
 }
