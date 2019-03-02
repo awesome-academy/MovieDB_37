@@ -14,7 +14,7 @@ import com.example.moviedb_37.screen.BaseFragment;
 
 import java.util.ArrayList;
 
-public class ActorFragment extends BaseFragment {
+public class ActorFragment extends BaseFragment implements ActorsAdapter.ItemClickListener {
     private FragmentActorBinding mBinding;
 
     @Nullable
@@ -26,5 +26,9 @@ public class ActorFragment extends BaseFragment {
         mBinding.setViewModel(mViewModel);
         setupAdapters(mBinding.recyclerActors, new ActorsAdapter(new ArrayList<Actor>()));
         return view;
+    }
+
+    @Override
+    public void onActorItemClick(Actor actor) {
     }
 }

@@ -15,6 +15,8 @@ import java.util.List;
 public class ActorsAdapter extends RecyclerView.Adapter<ActorsAdapter.ViewHolder> {
     private List<Actor> mActors;
 
+    private ItemClickListener mItemClickListener;
+
     public ActorsAdapter(List<Actor> actors) {
         mActors = actors;
     }
@@ -28,7 +30,7 @@ public class ActorsAdapter extends RecyclerView.Adapter<ActorsAdapter.ViewHolder
                 viewGroup,
                 false
         );
-        return new ViewHolder(binding);
+        return new ViewHolder(binding, mItemClickListener);
     }
 
     @Override
@@ -41,6 +43,10 @@ public class ActorsAdapter extends RecyclerView.Adapter<ActorsAdapter.ViewHolder
         return mActors != null ? mActors.size() : 0;
     }
 
+    public ActorsAdapter setItemClickListener(ItemClickListener itemClickListener) {
+        mItemClickListener = itemClickListener;
+        return this;
+    }
 
     public void replaceData(List<Actor> actors) {
         mActors.clear();
@@ -52,10 +58,10 @@ public class ActorsAdapter extends RecyclerView.Adapter<ActorsAdapter.ViewHolder
         private ItemActorInfoBinding mBinding;
         private ItemActorsViewModel mItemActorsViewModel;
 
-        public ViewHolder(ItemActorInfoBinding binding) {
+        public ViewHolder(ItemActorInfoBinding binding, ItemClickListener listener) {
             super(binding.getRoot());
             mBinding = binding;
-            mItemActorsViewModel = new ItemActorsViewModel();
+            mItemActorsViewModel = new ItemActorsViewModel(listener);
             mBinding.setViewModel(mItemActorsViewModel);
         }
 
@@ -63,5 +69,9 @@ public class ActorsAdapter extends RecyclerView.Adapter<ActorsAdapter.ViewHolder
             mItemActorsViewModel.setActor(actor);
             mBinding.executePendingBindings();
         }
+    }
+
+    public interface ItemClickListener {
+        void onActorItemClick(Actor actor);
     }
 }

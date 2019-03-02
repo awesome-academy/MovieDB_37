@@ -16,6 +16,8 @@ public class GenresDetailMovieAdapter extends
         RecyclerView.Adapter<GenresDetailMovieAdapter.ViewHolder> {
     private List<Genre> mGenres;
 
+    private ItemClickListener mItemClickListener;
+
     public GenresDetailMovieAdapter(List<Genre> genres) {
         mGenres = genres;
     }
@@ -29,7 +31,7 @@ public class GenresDetailMovieAdapter extends
                 viewGroup,
                 false
         );
-        return new ViewHolder(binding);
+        return new ViewHolder(binding, mItemClickListener);
     }
 
     @Override
@@ -42,6 +44,11 @@ public class GenresDetailMovieAdapter extends
         return mGenres != null ? mGenres.size() : 0;
     }
 
+    public GenresDetailMovieAdapter setItemClickListener(ItemClickListener itemClickListener) {
+        mItemClickListener = itemClickListener;
+        return this;
+    }
+
     public void replaceData(List<Genre> genres) {
         mGenres.clear();
         mGenres.addAll(genres);
@@ -52,10 +59,10 @@ public class GenresDetailMovieAdapter extends
         private ItemGenreDetailMovieBinding mBinding;
         private ItemGenreDetailViewModel mItemGenreDetailViewModel;
 
-        public ViewHolder(ItemGenreDetailMovieBinding binding) {
+        public ViewHolder(ItemGenreDetailMovieBinding binding, ItemClickListener listener) {
             super(binding.getRoot());
             mBinding = binding;
-            mItemGenreDetailViewModel = new ItemGenreDetailViewModel();
+            mItemGenreDetailViewModel = new ItemGenreDetailViewModel(listener);
             mBinding.setViewModel(mItemGenreDetailViewModel);
         }
 
@@ -63,5 +70,9 @@ public class GenresDetailMovieAdapter extends
             mItemGenreDetailViewModel.setGenre(genre);
             mBinding.executePendingBindings();
         }
+    }
+
+    public interface ItemClickListener {
+        void onGenreItemClick(Genre genre);
     }
 }

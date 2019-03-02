@@ -14,7 +14,7 @@ import com.example.moviedb_37.screen.BaseFragment;
 
 import java.util.ArrayList;
 
-public class TrailerFragment extends BaseFragment {
+public class TrailerFragment extends BaseFragment implements TrailerAdapter.ItemClickListener {
     private FragmentTrailerBinding mBinding;
 
     @Nullable
@@ -24,7 +24,13 @@ public class TrailerFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_trailer, container, false);
         mBinding = FragmentTrailerBinding.bind(view);
         mBinding.setViewModel(mViewModel);
-        setupAdapters(mBinding.recyclerTrailer, new TrailerAdapter(new ArrayList<Video>()));
+        TrailerAdapter adapter = new TrailerAdapter(new ArrayList<Video>());
+        adapter.setItemClickListener(this);
+        setupAdapters(mBinding.recyclerTrailer, adapter);
         return view;
+    }
+
+    @Override
+    public void onTrailerItemClick(Video video) {
     }
 }
