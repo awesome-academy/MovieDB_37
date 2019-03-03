@@ -1,5 +1,6 @@
 package com.example.moviedb_37.screen.trailer;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,17 @@ import java.util.ArrayList;
 
 public class TrailerFragment extends BaseFragment implements TrailerAdapter.ItemClickListener {
     private FragmentTrailerBinding mBinding;
+    private OnTrailerSelectedListener mListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (OnTrailerSelectedListener) context;
+        } catch (ClassCastException e) {
+            handleError(e.getMessage());
+        }
+    }
 
     @Nullable
     @Override
@@ -32,5 +44,13 @@ public class TrailerFragment extends BaseFragment implements TrailerAdapter.Item
 
     @Override
     public void onTrailerItemClick(Video video) {
+        mListener.onTrailerSelected(video);
+    }
+
+    private void handleError(String message) {
+    }
+
+    public interface OnTrailerSelectedListener {
+        public void onTrailerSelected(Video video);
     }
 }

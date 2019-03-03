@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.moviedb_37.BuildConfig;
 import com.example.moviedb_37.R;
 import com.example.moviedb_37.data.model.Actor;
 import com.example.moviedb_37.data.model.Company;
@@ -21,6 +22,9 @@ import com.example.moviedb_37.screen.movieinfo.GenresDetailMovieAdapter;
 import com.example.moviedb_37.screen.producer.ProducerAdapter;
 import com.example.moviedb_37.screen.trailer.TrailerAdapter;
 import com.example.moviedb_37.util.StringUtil;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubeThumbnailLoader;
+import com.google.android.youtube.player.YouTubeThumbnailView;
 
 import java.util.List;
 
@@ -131,5 +135,41 @@ public class BindingUtils {
         if (adapter != null && genres != null) {
             adapter.replaceData(genres);
         }
+    }
+
+    @BindingAdapter("app:youTubeThumbnailView")
+    public static void setYouTubeThumbnailViewForTrailer(YouTubeThumbnailView thumbnailView,
+                                                         final String videoKey) {
+        if (videoKey == null) {
+            thumbnailView.setImageResource(R.drawable.ic_play_circle);
+            return;
+        }
+        YouTubeThumbnailView.OnInitializedListener listener =
+                new YouTubeThumbnailView.OnInitializedListener() {
+                    @Override
+                    public void onInitializationSuccess(YouTubeThumbnailView view,
+                                                        final YouTubeThumbnailLoader loader) {
+                        loader.setVideo(videoKey);
+                        loader.setOnThumbnailLoadedListener(
+                                new YouTubeThumbnailLoader.OnThumbnailLoadedListener() {
+                                    @Override
+                                    public void onThumbnailLoaded(
+                                            YouTubeThumbnailView youTubeThumbnailView, String s) {
+                                        loader.release();
+                                    }
+
+                                    @Override
+                                    public void onThumbnailError(YouTubeThumbnailView view,
+                                                                 YouTubeThumbnailLoader.ErrorReason error) {
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onInitializationFailure(YouTubeThumbnailView view,
+                                                        YouTubeInitializationResult result) {
+                    }
+                };
+        thumbnailView.initialize(BuildConfig.YOUTUBE_API_KEY, listener);
     }
 }

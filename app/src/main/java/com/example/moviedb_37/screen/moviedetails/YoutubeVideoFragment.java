@@ -48,6 +48,12 @@ public class YoutubeVideoFragment extends YouTubePlayerFragment
         }
     }
 
+    public void playVideo() {
+        if (mYouTubePlayer != null) {
+            mYouTubePlayer.play();
+        }
+    }
+
     public String getVideoId() {
         return mVideoId;
     }
