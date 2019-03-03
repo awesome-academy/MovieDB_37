@@ -29,5 +29,7 @@ public interface MovieDataSource {
         Single<Movie> getMovieDetail(int movieId, String append);
 
         Single<List<Movie>> getMoviesByProduce(int page, String produceId);
+
+        Single<List<Movie>> getMoviesByActor(int page, String actorId);
     }
 }

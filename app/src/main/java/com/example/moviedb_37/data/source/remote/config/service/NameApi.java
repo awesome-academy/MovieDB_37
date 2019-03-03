@@ -36,4 +36,8 @@ public interface NameApi {
     @GET("/3/discover/movie")
     Single<CategoryResult> getMoviesByProduce(@Query("page") int page,
                                               @Query("with_companies") String companyId);
+
+    @GET("/3/discover/movie")
+    Single<CategoryResult> getMoviesByActor(@Query("page") int page,
+                                            @Query("with_cast") String actorId);
 }

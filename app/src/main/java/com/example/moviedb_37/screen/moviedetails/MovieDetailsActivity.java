@@ -28,12 +28,13 @@ import com.example.moviedb_37.screen.trailer.TrailerFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.moviedb_37.screen.home.HomeViewModel.ACTOR_SOURCE;
 import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_KEY;
 import static com.example.moviedb_37.screen.home.HomeViewModel.PRODUCE_SOURCE;
 
 public class MovieDetailsActivity extends AppCompatActivity implements
         OnChangeVideoListener, MovieDetailNavigator
-        , ProducerFragment.OnProduceSelectedListener {
+        , ProducerFragment.OnProduceSelectedListener, ActorFragment.OnActorSelectedListener {
 
     private static final String EXTRAS_ARGS = "com.example.moviedb_37.extras.EXTRAS_ARGS";
 
@@ -98,7 +99,8 @@ public class MovieDetailsActivity extends AppCompatActivity implements
 
     @Override
     public void showMovies(Actor actor, int getBy) {
-
+        Genre genre = new Genre(String.valueOf(actor.getId()), actor.getName());
+        startActivity(ListMovieCategoryActivity.getIntent(this, genre, getBy));
     }
 
     @Override
@@ -120,6 +122,11 @@ public class MovieDetailsActivity extends AppCompatActivity implements
     public void showMovies(Company company, int getBy) {
         Genre genre = new Genre(String.valueOf(company.getId()), company.getName());
         startActivity(ListMovieCategoryActivity.getIntent(this, genre, getBy));
+    }
+
+    @Override
+    public void onActorSelected(Actor actor) {
+        showMovies(actor, ACTOR_SOURCE);
     }
 
     public static class MainPagerAdapter extends FragmentPagerAdapter {

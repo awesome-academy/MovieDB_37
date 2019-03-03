@@ -65,4 +65,9 @@ public class MovieRepository implements MovieDataSource.Local,
     public Single<List<Movie>> getMoviesByProduce(int page, String produceId) {
         return mMovieRemoteDataSource.getMoviesByProduce(page, produceId);
     }
+
+    @Override
+    public Single<List<Movie>> getMoviesByActor(int page, String actorId) {
+        return mMovieRemoteDataSource.getMoviesByActor(page, actorId);
+    }
 }

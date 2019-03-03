@@ -30,6 +30,7 @@ public class HomeViewModel extends BaseObservable {
     public static final int GENRE_SOURCE = 0;
     public static final int CATEGORY_SOURCE = 1;
     public static final int PRODUCE_SOURCE = 2;
+    public static final int ACTOR_SOURCE = 3;
 
     public ObservableBoolean mIsLoadMorePopular = new ObservableBoolean();
     public ObservableBoolean mIsLoadMoreNowPlaying = new ObservableBoolean();
