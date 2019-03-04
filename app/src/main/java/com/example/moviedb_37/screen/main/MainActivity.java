@@ -26,6 +26,14 @@ public class MainActivity extends AppCompatActivity implements
                 new HomeFragment(), R.id.frame_fragments_container);
     }
 
+    @Override
+    protected void onStart() {
+        if (mCurrentFragment != null && mCurrentFragment instanceof FavoriteFragment) {
+            ((FavoriteFragment) mCurrentFragment).getViewModel().refreshFavoriteMovies();
+        }
+        super.onStart();
+    }
+
     private void setupBottomNavigationView() {
         BottomNavigationView bottomNavigationView = this.findViewById(R.id.bottom_navigation);
         if (bottomNavigationView != null) {

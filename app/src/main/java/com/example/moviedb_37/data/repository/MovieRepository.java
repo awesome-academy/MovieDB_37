@@ -77,13 +77,13 @@ public class MovieRepository implements MovieDataSource.Local,
     }
 
     @Override
-    public Single<List<Movie>> getFavoriteMovies() {
+    public List<Movie> getFavoriteMovies() {
         return mMovieLocalDataSource.getFavoriteMovies();
     }
 
     @Override
-    public boolean addFavariteMovie(Movie movie) {
-        return mMovieLocalDataSource.addFavariteMovie(movie);
+    public boolean addFavoriteMovie(Movie movie) {
+        return mMovieLocalDataSource.addFavoriteMovie(movie);
     }
 
     @Override
@@ -92,7 +92,12 @@ public class MovieRepository implements MovieDataSource.Local,
     }
 
     @Override
-    public boolean canAddFavarite(Movie movie) {
-        return mMovieLocalDataSource.canAddFavarite(movie);
+    public boolean canAddFavorite(Movie movie) {
+        return mMovieLocalDataSource.canAddFavorite(movie);
+    }
+
+    @Override
+    public boolean canAddFavorite(int movieId) {
+        return mMovieLocalDataSource.canAddFavorite(movieId);
     }
 }

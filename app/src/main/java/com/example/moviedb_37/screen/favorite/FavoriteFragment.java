@@ -43,6 +43,10 @@ public class FavoriteFragment extends Fragment
         return mBinding.getRoot();
     }
 
+    public FavoritiesViewModel getViewModel() {
+        return mViewModel;
+    }
+
     private void setupAdapters() {
         RecyclerView favoriteRecycler = mBinding.recyclerFavorities;
         mFavoriteAdapter = new CategoryAdapter(new ArrayList<Movie>(0));
@@ -76,6 +80,6 @@ public class FavoriteFragment extends Fragment
 
     @Override
     public void onDeleteFavoritiesClick(Movie movie) {
-
+        mViewModel.deleteFavoriteMovie(movie);
     }
 }

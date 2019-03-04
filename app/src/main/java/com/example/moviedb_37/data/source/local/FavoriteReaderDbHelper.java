@@ -59,7 +59,7 @@ public class FavoriteReaderDbHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public boolean putTrack(Movie movie) {
+    public boolean putMovie(Movie movie) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(FavoriteReaderContract.FavoriteEntry.COLUMN_NAME_MOVIE_ID, movie.getId());
@@ -134,13 +134,31 @@ public class FavoriteReaderDbHelper extends SQLiteOpenHelper {
     }
 
     public boolean canAddMovie(Movie movie) {
-        long trackId = movie.getId();
+        long movieId = movie.getId();
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         String[] projection = {
                 FavoriteReaderContract.FavoriteEntry.COLUMN_NAME_MOVIE_ID,
         };
         String selection = FavoriteReaderContract.FavoriteEntry.COLUMN_NAME_MOVIE_ID + QUESTION_ARG;
-        String[] selectionArgs = {String.valueOf(trackId)};
+        String[] selectionArgs = {String.valueOf(movieId)};
+        Cursor cursor = sqLiteDatabase.query(
+                FavoriteReaderContract.FavoriteEntry.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        return (cursor.getCount() <= 0);
+    }
+
+    public boolean canAddMovie(int movieId) {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        String[] projection = {
+                FavoriteReaderContract.FavoriteEntry.COLUMN_NAME_MOVIE_ID,
+        };
+        String selection = FavoriteReaderContract.FavoriteEntry.COLUMN_NAME_MOVIE_ID + QUESTION_ARG;
+        String[] selectionArgs = {String.valueOf(movieId)};
         Cursor cursor = sqLiteDatabase.query(
                 FavoriteReaderContract.FavoriteEntry.TABLE_NAME,
                 projection,

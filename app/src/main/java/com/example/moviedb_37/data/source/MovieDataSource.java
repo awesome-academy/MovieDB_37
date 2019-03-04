@@ -10,13 +10,15 @@ import io.reactivex.Single;
 public interface MovieDataSource {
 
     interface Local extends MovieDataSource {
-        Single<List<Movie>> getFavoriteMovies();
+        List<Movie> getFavoriteMovies();
 
-        boolean addFavariteMovie(Movie movie);
+        boolean addFavoriteMovie(Movie movie);
 
         boolean deleteFavoriteMovie(Movie movie);
 
-        boolean canAddFavarite(Movie movie);
+        boolean canAddFavorite(Movie movie);
+
+        boolean canAddFavorite(int movieId);
     }
 
     interface Remote extends MovieDataSource {

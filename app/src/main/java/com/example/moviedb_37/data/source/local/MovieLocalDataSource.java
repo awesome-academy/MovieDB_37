@@ -5,9 +5,6 @@ import com.example.moviedb_37.data.source.MovieDataSource;
 
 import java.util.List;
 
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-
 public class MovieLocalDataSource implements MovieDataSource.Local {
     private static final String EXIST_TRACK = "Exist track in favorite";
     private static MovieLocalDataSource sInstance;
@@ -24,19 +21,13 @@ public class MovieLocalDataSource implements MovieDataSource.Local {
         return sInstance;
     }
 
-    @Override
-    public Single<List<Movie>> getFavoriteMovies() {
-        return new Single<List<Movie>>() {
-            @Override
-            protected void subscribeActual(SingleObserver<? super List<Movie>> observer) {
-                mDbHelper.getMovie();
-            }
-        };
+    public List<Movie> getFavoriteMovies() {
+        return mDbHelper.getMovie();
     }
 
     @Override
-    public boolean addFavariteMovie(Movie movie) {
-        return mDbHelper.putTrack(movie);
+    public boolean addFavoriteMovie(Movie movie) {
+        return mDbHelper.putMovie(movie);
     }
 
     @Override
@@ -45,7 +36,12 @@ public class MovieLocalDataSource implements MovieDataSource.Local {
     }
 
     @Override
-    public boolean canAddFavarite(Movie movie) {
+    public boolean canAddFavorite(Movie movie) {
         return mDbHelper.canAddMovie(movie);
+    }
+
+    @Override
+    public boolean canAddFavorite(int movieId) {
+        return mDbHelper.canAddMovie(movieId);
     }
 }
