@@ -49,11 +49,12 @@
 
         <ImageView
             android:id="@+id/image_favorite"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_30"
             android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onFavoriteClick(viewModel.movieObservable)}"
+            android:src="@{viewModel.isFavoriteMovieObservable ? @drawable/ic_favorite_black : @drawable/ic_favorite_border_black}"
             android:layout_marginEnd="@dimen/dp_16"
             android:layout_marginRight="@dimen/dp_16"
-            android:src="@drawable/ic_favorite_border_back"
             app:layout_constraintBottom_toBottomOf="@id/rating_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/text_movie_name" />
