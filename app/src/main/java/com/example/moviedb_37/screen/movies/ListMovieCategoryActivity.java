@@ -14,6 +14,8 @@ import com.example.moviedb_37.R;
 import com.example.moviedb_37.data.model.Genre;
 import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.repository.MovieRepository;
+import com.example.moviedb_37.data.source.local.FavoriteReaderDbHelper;
+import com.example.moviedb_37.data.source.local.MovieLocalDataSource;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.ActivityListMovieCategoryBinding;
 import com.example.moviedb_37.screen.home.CategoryAdapter;
@@ -63,17 +65,22 @@ public class ListMovieCategoryActivity extends AppCompatActivity implements Movi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getIntent().getBundleExtra(EXTRAS_ARGS);
-        mViewModel = new ListMovieCategoryViewModel(
-                MovieRepository.getInstance(MovieRemoteDataSource.getInstance()),
-
-                bundle.getInt(HomeViewModel.BUNDLE_SOURCE),
-                bundle.getString(BUNDLE_KEY));
+        initViewModel();
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_list_movie_category);
         mBinding.setViewModel(mViewModel);
         setupToolbar();
         setupAdapters();
+    }
+
+    private void initViewModel() {
+        FavoriteReaderDbHelper dbHelper = new FavoriteReaderDbHelper(this);
+        Bundle bundle = getIntent().getBundleExtra(EXTRAS_ARGS);
+        mViewModel = new ListMovieCategoryViewModel(
+                MovieRepository.getInstance(MovieRemoteDataSource.getInstance(),
+                        MovieLocalDataSource.getInstance(dbHelper)),
+                bundle.getInt(HomeViewModel.BUNDLE_SOURCE),
+                bundle.getString(HomeViewModel.BUNDLE_KEY));
     }
 
     private void setupAdapters() {

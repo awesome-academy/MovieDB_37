@@ -18,4 +18,5 @@
     <string name="tab_title_producer">Producer</string>
     <string name="title_actor_name">Actor</string>
     <string name="title_trailer_name">Trailer</string>
+    <string name="title_favorities">Favorite</string>
 </resources>

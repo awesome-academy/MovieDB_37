@@ -16,6 +16,8 @@ import com.example.moviedb_37.R;
 import com.example.moviedb_37.data.model.Genre;
 import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.repository.MovieRepository;
+import com.example.moviedb_37.data.source.local.FavoriteReaderDbHelper;
+import com.example.moviedb_37.data.source.local.MovieLocalDataSource;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.FragmentHomeBinding;
 import com.example.moviedb_37.screen.moviedetails.MovieDetailsActivity;
@@ -83,8 +85,10 @@ public class HomeFragment extends Fragment implements HomeNavigator
     }
 
     private void initViewModel() {
+        FavoriteReaderDbHelper dbHelper = new FavoriteReaderDbHelper(getContext());
         MovieRepository movieRepository = MovieRepository.getInstance(
-                MovieRemoteDataSource.getInstance());
+                MovieRemoteDataSource.getInstance(),
+                MovieLocalDataSource.getInstance(dbHelper));
         mViewModel = new HomeViewModel(movieRepository);
     }
 
@@ -118,6 +122,11 @@ public class HomeFragment extends Fragment implements HomeNavigator
     @Override
     public void onMovieItemClick(Movie movie) {
         showMovieDetail(movie);
+
+    }
+
+    @Override
+    public void onDeleteFavoritiesClick(Movie movie) {
 
     }
 }

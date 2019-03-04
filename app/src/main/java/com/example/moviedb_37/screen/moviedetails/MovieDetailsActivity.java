@@ -17,6 +17,8 @@ import com.example.moviedb_37.data.model.Genre;
 import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.model.Video;
 import com.example.moviedb_37.data.repository.MovieRepository;
+import com.example.moviedb_37.data.source.local.FavoriteReaderDbHelper;
+import com.example.moviedb_37.data.source.local.MovieLocalDataSource;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.ActivityMovieDetailsBinding;
 import com.example.moviedb_37.screen.actors.ActorFragment;
@@ -56,16 +58,22 @@ public class MovieDetailsActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mMovieId = getIntent().getBundleExtra(EXTRAS_ARGS).getString(BUNDLE_KEY);
-        mViewModel = new MovieDetailsViewModel(Integer.valueOf(mMovieId)
-                , MovieRepository.getInstance(MovieRemoteDataSource.getInstance()));
-        mViewModel.setOnChangeVideoListener(this);
-        mViewModel.setNavigator(this);
+        initViewModel();
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_details);
         mBinding.setViewModel(mViewModel);
         initViews();
         mYouTubeVideoFragment =
                 (YoutubeVideoFragment) getFragmentManager().findFragmentById(R.id.player);
+    }
+
+    private void initViewModel() {
+        FavoriteReaderDbHelper dbHelper = new FavoriteReaderDbHelper(this);
+        mMovieId = getIntent().getBundleExtra(EXTRAS_ARGS).getString(BUNDLE_KEY);
+        mViewModel = new MovieDetailsViewModel(Integer.valueOf(mMovieId),
+                MovieRepository.getInstance(MovieRemoteDataSource.getInstance(),
+                        MovieLocalDataSource.getInstance(dbHelper)));
+        mViewModel.setOnChangeVideoListener(this);
+        mViewModel.setNavigator(this);
     }
 
     private void initViews() {

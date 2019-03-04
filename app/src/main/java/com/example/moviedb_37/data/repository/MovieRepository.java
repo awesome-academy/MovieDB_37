@@ -3,6 +3,7 @@ package com.example.moviedb_37.data.repository;
 import com.example.moviedb_37.data.model.Genre;
 import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.source.MovieDataSource;
+import com.example.moviedb_37.data.source.local.MovieLocalDataSource;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 
 import java.util.List;
@@ -14,14 +15,18 @@ public class MovieRepository implements MovieDataSource.Local,
 
     private static MovieRepository sInstance;
     private MovieRemoteDataSource mMovieRemoteDataSource;
+    private MovieLocalDataSource mMovieLocalDataSource;
 
-    private MovieRepository(MovieRemoteDataSource movieRemoteDataSource) {
+    private MovieRepository(MovieRemoteDataSource movieRemoteDataSource,
+                            MovieLocalDataSource movieLocalDataSource) {
         mMovieRemoteDataSource = movieRemoteDataSource;
+        mMovieLocalDataSource = movieLocalDataSource;
     }
 
-    public static MovieRepository getInstance(MovieRemoteDataSource movieRemoteDataSource) {
+    public static MovieRepository getInstance(MovieRemoteDataSource movieRemoteDataSource,
+                                              MovieLocalDataSource movieLocalDataSource) {
         if (sInstance == null) {
-            sInstance = new MovieRepository(movieRemoteDataSource);
+            sInstance = new MovieRepository(movieRemoteDataSource, movieLocalDataSource);
         }
         return sInstance;
     }
@@ -69,5 +74,25 @@ public class MovieRepository implements MovieDataSource.Local,
     @Override
     public Single<List<Movie>> getMoviesByActor(int page, String actorId) {
         return mMovieRemoteDataSource.getMoviesByActor(page, actorId);
+    }
+
+    @Override
+    public Single<List<Movie>> getFavoriteMovies() {
+        return mMovieLocalDataSource.getFavoriteMovies();
+    }
+
+    @Override
+    public boolean addFavariteMovie(Movie movie) {
+        return mMovieLocalDataSource.addFavariteMovie(movie);
+    }
+
+    @Override
+    public boolean deleteFavoriteMovie(Movie movie) {
+        return mMovieLocalDataSource.deleteFavoriteMovie(movie);
+    }
+
+    @Override
+    public boolean canAddFavarite(Movie movie) {
+        return mMovieLocalDataSource.canAddFavarite(movie);
     }
 }
