@@ -17,7 +17,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     private List<Movie> mMovies;
     private ItemClickListener mItemClickListener;
-
+    private boolean mIsFavorities;
 
     public CategoryAdapter(List<Movie> movies) {
         this.mMovies = movies;
@@ -32,7 +32,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 viewGroup,
                 false
         );
-        return new ViewHolder(binding, mItemClickListener);
+        return new ViewHolder(binding, mIsFavorities, mItemClickListener);
+    }
+
+    public CategoryAdapter setFavorities(boolean favorities) {
+        mIsFavorities = favorities;
+        return this;
     }
 
     @Override
@@ -54,10 +59,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         private ItemMovieBinding mBinding;
         private ItemMovieListViewModel mItemMovieListViewModel;
 
-        public ViewHolder(ItemMovieBinding binding, ItemClickListener listener) {
+        public ViewHolder(ItemMovieBinding binding, boolean isFavorities, ItemClickListener listener) {
             super(binding.getRoot());
             mBinding = binding;
             mItemMovieListViewModel = new ItemMovieListViewModel(listener);
+            mItemMovieListViewModel.setIsFavotities(isFavorities);
             mBinding.setViewModel(mItemMovieListViewModel);
         }
 
@@ -86,5 +92,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     public interface ItemClickListener {
         void onMovieItemClick(Movie movie);
+
+        void onDeleteFavoritiesClick(Movie movie);
     }
 }
