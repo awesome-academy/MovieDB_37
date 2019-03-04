@@ -6,6 +6,6 @@ import com.example.moviedb_37.screen.producer.ProducerNavigator;
 import com.example.moviedb_37.screen.trailer.TrailerNavigator;
 
 public interface MovieDetailNavigator extends InfoNavigator, ActorsNavigator,
-        ProducerNavigator, TrailerNavigator {
+        ProducerNavigator {
     void back();
 }

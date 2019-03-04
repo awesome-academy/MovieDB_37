@@ -33,8 +33,9 @@ import static com.example.moviedb_37.screen.home.HomeViewModel.BUNDLE_KEY;
 import static com.example.moviedb_37.screen.home.HomeViewModel.PRODUCE_SOURCE;
 
 public class MovieDetailsActivity extends AppCompatActivity implements
-        OnChangeVideoListener, MovieDetailNavigator
-        , ProducerFragment.OnProduceSelectedListener, ActorFragment.OnActorSelectedListener {
+        OnChangeVideoListener, MovieDetailNavigator,
+        ProducerFragment.OnProduceSelectedListener, ActorFragment.OnActorSelectedListener,
+        TrailerFragment.OnTrailerSelectedListener {
 
     private static final String EXTRAS_ARGS = "com.example.moviedb_37.extras.EXTRAS_ARGS";
 
@@ -63,7 +64,8 @@ public class MovieDetailsActivity extends AppCompatActivity implements
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_details);
         mBinding.setViewModel(mViewModel);
         initViews();
-        mYouTubeVideoFragment = (YoutubeVideoFragment) getFragmentManager().findFragmentById(R.id.player);
+        mYouTubeVideoFragment =
+                (YoutubeVideoFragment) getFragmentManager().findFragmentById(R.id.player);
     }
 
     private void initViews() {
@@ -109,11 +111,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void showMovies(Video video, int getBy) {
-
-    }
-
-    @Override
     public void onProduceSelected(Company company) {
         showMovies(company, PRODUCE_SOURCE);
     }
@@ -127,6 +124,12 @@ public class MovieDetailsActivity extends AppCompatActivity implements
     @Override
     public void onActorSelected(Actor actor) {
         showMovies(actor, ACTOR_SOURCE);
+    }
+
+    @Override
+    public void onTrailerSelected(Video video) {
+        setVideoId(video.getKey());
+        mYouTubeVideoFragment.playVideo();
     }
 
     public static class MainPagerAdapter extends FragmentPagerAdapter {
