@@ -80,21 +80,23 @@ public class MovieDetailsActivity extends AppCompatActivity implements
         ViewPager viewPager = findViewById(R.id.view_pager);
         MainPagerAdapter pagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
 
-        InfoMovieFragment infoMovieFragment = new InfoMovieFragment();
+        InfoMovieFragment infoMovieFragment = InfoMovieFragment.newInstance();
         infoMovieFragment.setViewModel(mViewModel);
         pagerAdapter.addFragment(infoMovieFragment, getString(R.string.tab_title_information));
 
-        ActorFragment actorsFragment = new ActorFragment();
+        ActorFragment actorsFragment = ActorFragment.newInstance();
         actorsFragment.setViewModel(mViewModel);
         pagerAdapter.addFragment(actorsFragment, getString(R.string.tab_title_actor));
 
-        TrailerFragment trailerFragment = new TrailerFragment();
+        TrailerFragment trailerFragment = TrailerFragment.newInstance();
         trailerFragment.setViewModel(mViewModel);
         pagerAdapter.addFragment(trailerFragment, getString(R.string.tab_title_trailer));
 
-        ProducerFragment produceFragment = new ProducerFragment();
+        ProducerFragment produceFragment = ProducerFragment.newInstance();
         produceFragment.setViewModel(mViewModel);
         pagerAdapter.addFragment(produceFragment, getString(R.string.tab_title_producer));
+
+        viewPager.setAdapter(pagerAdapter);
     }
 
     @Override

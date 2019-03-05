@@ -42,4 +42,9 @@ public class InfoMovieFragment extends BaseFragment
     public void showMovies(Genre genre, int getBy) {
 
     }
+
+    public static InfoMovieFragment newInstance() {
+        InfoMovieFragment fragment = new InfoMovieFragment();
+        return fragment;
+    }
 }

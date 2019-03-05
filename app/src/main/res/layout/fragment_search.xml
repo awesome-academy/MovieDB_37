@@ -1,0 +1,86 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.moviedb_37.screen.search.SearchViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/home_background">
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/search_view"
+            style="@style/SearchViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_result"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_56"
+            android:background="@color/color_brighter_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_view" />
+
+        <TextView
+            android:id="@+id/text_total_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:text="@string/title_default_search_result"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dp_14"
+            app:layout_constraintBottom_toBottomOf="@id/view_result"
+            app:layout_constraintStart_toStartOf="@id/view_result"
+            app:layout_constraintTop_toTopOf="@id/view_result"
+            android:layout_marginLeft="@dimen/dp_16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_4"
+            android:text="@string/title_results"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@id/view_result"
+            app:layout_constraintStart_toEndOf="@id/text_total_result"
+            app:layout_constraintTop_toTopOf="@id/view_result"
+            android:layout_marginLeft="@dimen/dp_4" />
+
+        <ImageView
+            android:id="@+id/image_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:src="@drawable/ic_filter_list_black"
+            app:layout_constraintBottom_toBottomOf="@id/view_result"
+            app:layout_constraintEnd_toEndOf="@id/view_result"
+            app:layout_constraintTop_toTopOf="@id/view_result"
+            android:onClick="@{() -> viewModel.onFilterClick()}"
+            android:layout_marginRight="@dimen/dp_16" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_8"
+            app:bindMovies="@{viewModel.searchedMoviesObservable}"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_result"
+            app:layout_constraintVertical_bias="0" />
+    </android.support.constraint.ConstraintLayout>
+</layout>
