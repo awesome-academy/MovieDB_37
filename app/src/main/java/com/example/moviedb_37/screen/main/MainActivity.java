@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import com.example.moviedb_37.R;
 import com.example.moviedb_37.screen.favorite.FavoriteFragment;
 import com.example.moviedb_37.screen.home.HomeFragment;
+import com.example.moviedb_37.screen.search.SearchFragment;
 import com.example.moviedb_37.util.ActivityUtils;
 
 public class MainActivity extends AppCompatActivity implements
@@ -56,13 +57,20 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.navigation_fovorities:
                 showFavoriteScreen();
             case R.id.navigation_search:
+                showSearchScreen();
                 break;
             default:
                 break;
+
         }
         return true;
     }
 
+    private void showSearchScreen() {
+        mCurrentFragment = SearchFragment.newInstance();
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                mCurrentFragment, R.id.frame_fragments_container);
+    }
 
     public void showHomeScreen() {
         mCurrentFragment = HomeFragment.newInstance();

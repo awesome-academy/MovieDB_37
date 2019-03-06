@@ -53,4 +53,9 @@ public class ProducerFragment extends BaseFragment implements ProducerAdapter.It
 
     private void handleError(String message) {
     }
+
+    public static ProducerFragment newInstance() {
+        ProducerFragment fragment = new ProducerFragment();
+        return fragment;
+    }
 }

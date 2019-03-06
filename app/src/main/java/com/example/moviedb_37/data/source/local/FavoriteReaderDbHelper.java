@@ -167,7 +167,6 @@ public class FavoriteReaderDbHelper extends SQLiteOpenHelper {
                 null,
                 null,
                 null);
-        sqLiteDatabase.close();
         return (cursor.getCount() <= 0);
     }
 }

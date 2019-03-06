@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/home_background"
+    android:paddingLeft="@dimen/dp_16"
+    android:paddingTop="@dimen/dp_8"
+    android:paddingRight="@dimen/dp_16"
+    android:paddingBottom="@dimen/dp_8">
+
+    <TextView
+        android:id="@+id/text_search_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_32"
+        android:layout_marginLeft="@dimen/dp_32"
+        android:layout_marginTop="@dimen/dp_8"
+        android:text="@string/title_search_by"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radio_group_search_by"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:gravity="right"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_search_by">
+
+        <RadioButton
+            android:id="@+id/radio_button_keyword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:buttonTint="@color/color_blue"
+            android:checked="true"
+            android:gravity="left|center_vertical"
+            android:layoutDirection="rtl"
+            android:text="@string/title_radio_keyword"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
+            android:id="@+id/radio_button_movie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:buttonTint="@color/color_blue"
+            android:gravity="left|center_vertical"
+            android:layoutDirection="rtl"
+            android:text="@string/title_radio_movie"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
+            android:id="@+id/radio_button_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:buttonTint="@color/color_blue"
+            android:gravity="left|center_vertical"
+            android:layoutDirection="rtl"
+            android:text="@string/title_radio_category"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
+            android:id="@+id/radio_button_genre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:buttonTint="@color/color_blue"
+            android:gravity="left|center_vertical"
+            android:layoutDirection="rtl"
+            android:text="@string/title_radio_genre"
+            android:textColor="@android:color/white" />
+    </RadioGroup>
+</android.support.constraint.ConstraintLayout>

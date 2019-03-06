@@ -32,7 +32,7 @@ public class ItemMovieListViewModel extends BaseObservable {
         mItemClickListener.onMovieItemClick(mMovieObservableField.get());
     }
 
-    public void onDeleteFavoritiesClick(View view) {
+    public void onDeleteFavoriteMovieClick(View view) {
         if (mItemClickListener == null || mMovieObservableField.get() == null) {
             return;
         }

@@ -19,4 +19,14 @@
     <string name="title_actor_name">Actor</string>
     <string name="title_trailer_name">Trailer</string>
     <string name="title_favorities">Favorite</string>
+
+    <string name="title_results">results</string>
+    <string name="title_search_hint">keyword...</string>
+    <string name="title_default_search_result">0</string>
+    <string name="title_search_by">SEARCH BY</string>
+    <string name="title_radio_keyword">Keyword</string>
+    <string name="title_radio_movie">Movie</string>
+    <string name="title_radio_category">Category</string>
+    <string name="title_radio_genre">Genre</string>
+    <string name="title_search_option">Search Options</string>
 </resources>

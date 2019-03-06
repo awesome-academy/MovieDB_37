@@ -155,6 +155,11 @@ public class ListMovieCategoryActivity extends AppCompatActivity implements Movi
     }
 
     @Override
+    public void onDeleteFavoritiesClick(Movie movie) {
+
+    }
+
+    @Override
     public void showMovieDetail(Movie movie) {
         startActivity(MovieDetailsActivity.getIntent(this, movie));
     }

@@ -53,4 +53,9 @@ public class TrailerFragment extends BaseFragment implements TrailerAdapter.Item
     public interface OnTrailerSelectedListener {
         public void onTrailerSelected(Video video);
     }
+
+    public static TrailerFragment newInstance() {
+        TrailerFragment fragment = new TrailerFragment();
+        return fragment;
+    }
 }

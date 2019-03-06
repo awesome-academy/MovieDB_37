@@ -51,4 +51,8 @@ public class ActorFragment extends BaseFragment implements ActorsAdapter.ItemCli
 
     private void handleError(String message) {
     }
+    public static ActorFragment newInstance() {
+        ActorFragment fragment = new ActorFragment();
+        return fragment;
+    }
 }
