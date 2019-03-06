@@ -93,6 +93,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public interface ItemClickListener {
         void onMovieItemClick(Movie movie);
 
-        void onDeleteFavoritiesClick(Movie movie);
+        void onDeleteFavoriteMovieClick(Movie movie);
     }
 }

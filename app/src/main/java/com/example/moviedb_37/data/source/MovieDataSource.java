@@ -2,6 +2,7 @@ package com.example.moviedb_37.data.source;
 
 import com.example.moviedb_37.data.model.Genre;
 import com.example.moviedb_37.data.model.Movie;
+import com.example.moviedb_37.data.source.remote.config.response.CategoryResult;
 
 import java.util.List;
 
@@ -39,5 +40,7 @@ public interface MovieDataSource {
         Single<List<Movie>> getMoviesByProduce(int page, String produceId);
 
         Single<List<Movie>> getMoviesByActor(int page, String actorId);
+
+        Single<CategoryResult> searchMovie(String type, String keyword, int page);
     }
 }

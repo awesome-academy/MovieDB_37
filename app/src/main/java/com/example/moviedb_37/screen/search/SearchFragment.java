@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 
 import com.example.moviedb_37.R;
 import com.example.moviedb_37.data.model.Movie;
@@ -20,19 +23,27 @@ import com.example.moviedb_37.data.source.local.MovieLocalDataSource;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
 import com.example.moviedb_37.databinding.FragmentSearchBinding;
 import com.example.moviedb_37.screen.home.CategoryAdapter;
+import com.example.moviedb_37.screen.moviedetails.MovieDetailsActivity;
 import com.example.moviedb_37.screen.searchfilter.SearchFilterActivity;
+import com.example.moviedb_37.util.Constans;
 
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
-public class SearchFragment extends Fragment implements SearchNavigator {
+public class SearchFragment extends Fragment implements SearchNavigator,
+        CategoryAdapter.ItemClickListener {
     public static final int REQUSET_CODE_FILTER = 9596;
-    private static final String EXTRAS_ARGS = "vunt.com.vn.moviedb_28.extras.EXTRAS_ARGS";
+    private static final String EXTRAS_ARGS = "com.example.moviedb_37.extras.EXTRAS_ARGS";
     private static final String BUNDLE_SEARCH_BY = "BUNDLE_SEARCH_BY";
     private SearchViewModel mViewModel;
     private FragmentSearchBinding mBinding;
 
+    private LinearLayoutManager mLayoutManager;
+    private boolean isScrolling;
+    private int currentItem;
+    private int totalItem;
+    private int scrolOutItem;
     private CategoryAdapter mSearchAdapter;
 
     private static Class mActivityClassName;
@@ -60,6 +71,7 @@ public class SearchFragment extends Fragment implements SearchNavigator {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mLayoutManager = new LinearLayoutManager(getContext());
         initViewModel();
         setNavigator();
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_search,
@@ -67,10 +79,15 @@ public class SearchFragment extends Fragment implements SearchNavigator {
         mBinding.setViewModel(mViewModel);
 
         setupAdapters();
-
+        setupSearchView();
         return mBinding.getRoot();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mViewModel.clear();
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -88,7 +105,7 @@ public class SearchFragment extends Fragment implements SearchNavigator {
 
     @Override
     public void showMovieDetail(Movie movie) {
-
+        startActivity(MovieDetailsActivity.getIntent(getContext(), movie));
     }
 
     private void initViewModel() {
@@ -100,12 +117,73 @@ public class SearchFragment extends Fragment implements SearchNavigator {
     }
 
     private void setupAdapters() {
-        RecyclerView searchoRecycler = mBinding.recyclerSearch;
+        RecyclerView searchRecycler = mBinding.recyclerSearch;
+        searchRecycler.setLayoutManager(mLayoutManager);
         mSearchAdapter = new CategoryAdapter(new ArrayList<Movie>(0));
-        searchoRecycler.setAdapter(mSearchAdapter);
+        mSearchAdapter.setItemClickListener(this);
+        searchRecycler.setAdapter(mSearchAdapter);
+        setupScrollListener(searchRecycler);
+    }
+
+    private void setupSearchView() {
+        SearchView searchView = mBinding.searchView;
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                mViewModel.setCurrentPage(Constans.FIRST_PAGE);
+                mViewModel.setKey(s);
+                mViewModel.searchMovie();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                mViewModel.setCurrentPage(Constans.FIRST_PAGE);
+                mViewModel.setKey(s);
+                mViewModel.searchMovie();
+                return true;
+            }
+        });
+    }
+
+    private void setupScrollListener(RecyclerView genresRecycler) {
+        genresRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    isScrolling = true;
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                currentItem = mLayoutManager.getChildCount();
+                totalItem = mLayoutManager.getItemCount();
+                scrolOutItem = mLayoutManager.findFirstVisibleItemPosition();
+                if (isScrolling && (currentItem + scrolOutItem == totalItem)) {
+                    isScrolling = false;
+                    mViewModel.mIsLoadMore.set(true);
+                    mViewModel.increaseCurrentPage();
+                    mViewModel.searchMovie();
+                    mViewModel.mIsLoadMore.set(true);
+                }
+            }
+        });
     }
 
     private void setNavigator() {
         mViewModel.setSearchNavigator(this);
+    }
+
+    @Override
+    public void onMovieItemClick(Movie movie) {
+        showMovieDetail(movie);
+    }
+
+    @Override
+    public void onDeleteFavoriteMovieClick(Movie movie) {
+
     }
 }

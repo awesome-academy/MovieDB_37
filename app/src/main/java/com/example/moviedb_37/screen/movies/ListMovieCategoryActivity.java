@@ -155,7 +155,7 @@ public class ListMovieCategoryActivity extends AppCompatActivity implements Movi
     }
 
     @Override
-    public void onDeleteFavoritiesClick(Movie movie) {
+    public void onDeleteFavoriteMovieClick(Movie movie) {
 
     }
 

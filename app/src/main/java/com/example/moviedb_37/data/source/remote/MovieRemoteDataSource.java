@@ -33,55 +33,30 @@ public class MovieRemoteDataSource implements MovieDataSource.Remote {
 
     public Single<List<Movie>> getPopularMovies(int page) {
         return mApi.getPopularMovies(page)
-                .map(new Function<CategoryResult, List<Movie>>() {
-                    @Override
-                    public List<Movie> apply(CategoryResult categoryResult) {
-                        return categoryResult.getMovies();
-                    }
-                });
+                .map(categoryResult -> categoryResult.getMovies());
     }
 
     public Single<List<Movie>> getNowPlayingMovies(int page) {
         return mApi.getNowPlayingMovies(page)
-                .map(new Function<CategoryResult, List<Movie>>() {
-                    @Override
-                    public List<Movie> apply(CategoryResult categoryResult) {
-                        return categoryResult.getMovies();
-                    }
-                });
+                .map(categoryResult -> categoryResult.getMovies());
     }
 
     @Override
     public Single<List<Movie>> getUpComingMovies(int page) {
         return mApi.getUpComingMovies(page)
-                .map(new Function<CategoryResult, List<Movie>>() {
-                    @Override
-                    public List<Movie> apply(CategoryResult categoryResult) {
-                        return categoryResult.getMovies();
-                    }
-                });
+                .map(categoryResult -> categoryResult.getMovies());
     }
 
     @Override
     public Single<List<Movie>> getTopRateMovies(int page) {
         return mApi.getTopRateMovies(page)
-                .map(new Function<CategoryResult, List<Movie>>() {
-                    @Override
-                    public List<Movie> apply(CategoryResult categoryResult) {
-                        return categoryResult.getMovies();
-                    }
-                });
+                .map(categoryResult -> categoryResult.getMovies());
     }
 
     @Override
     public Single<List<Genre>> getGenres() {
         return mApi.getGenres()
-                .map(new Function<GenreResult, List<Genre>>() {
-                    @Override
-                    public List<Genre> apply(GenreResult genreResult) {
-                        return genreResult.getGenres();
-                    }
-                });
+                .map(genreResult -> genreResult.getGenres());
     }
 
     @Override
@@ -106,5 +81,10 @@ public class MovieRemoteDataSource implements MovieDataSource.Remote {
         return mApi.getMoviesByActor(page, actorId)
                 .map(categoryResult -> categoryResult.getMovies());
 
+    }
+
+    @Override
+    public Single<CategoryResult> searchMovie(String type, String keyword, int page) {
+        return mApi.searchMovie(type, keyword, page);
     }
 }

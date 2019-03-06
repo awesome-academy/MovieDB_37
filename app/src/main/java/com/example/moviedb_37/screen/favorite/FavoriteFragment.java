@@ -79,7 +79,7 @@ public class FavoriteFragment extends Fragment
     }
 
     @Override
-    public void onDeleteFavoritiesClick(Movie movie) {
+    public void onDeleteFavoriteMovieClick(Movie movie) {
         mViewModel.deleteFavoriteMovie(movie);
     }
 }

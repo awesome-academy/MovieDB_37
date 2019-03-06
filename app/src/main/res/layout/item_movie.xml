@@ -24,10 +24,9 @@
 
             <ImageView
                 android:id="@+id/image_movie"
-                android:layout_width="@dimen/dp_125"
+                android:layout_width="@dimen/dp_130"
                 android:layout_height="0dp"
                 android:background="@color/color_brighter_black"
-                android:padding="@dimen/dp_8"
                 android:scaleType='@{viewModel.mMovieObservableField.backdropPath == null ? "centerCrop" : "" }'
                 android:src="@drawable/ic_play_circle"
                 app:imageUrl="@{viewModel.mMovieObservableField.backdropPath}"
@@ -75,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_16"
                 android:layout_marginRight="@dimen/dp_16"
-                android:onClick="@{viewModel::onDeleteFavoritiesClick}"
+                android:onClick="@{viewModel::onDeleteFavoriteMovieClick}"
                 android:src="@drawable/ic_delete_blue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
