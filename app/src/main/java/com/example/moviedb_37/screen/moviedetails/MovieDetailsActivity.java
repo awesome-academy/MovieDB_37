@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.example.moviedb_37.R;
 import com.example.moviedb_37.data.model.Actor;
@@ -129,6 +130,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements
     public void showMovies(Company company, int getBy) {
         Genre genre = new Genre(String.valueOf(company.getId()), company.getName());
         startActivity(ListMovieCategoryActivity.getIntent(this, genre, getBy));
+
     }
 
     @Override

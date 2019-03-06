@@ -36,6 +36,6 @@ public class ItemMovieListViewModel extends BaseObservable {
         if (mItemClickListener == null || mMovieObservableField.get() == null) {
             return;
         }
-        mItemClickListener.onDeleteFavoritiesClick(mMovieObservableField.get());
+        mItemClickListener.onDeleteFavoriteMovieClick(mMovieObservableField.get());
     }
 }

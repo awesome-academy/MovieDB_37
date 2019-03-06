@@ -6,6 +6,7 @@
         <variable
             name="viewModel"
             type="com.example.moviedb_37.screen.home.HomeViewModel" />
+
         <import type="com.example.moviedb_37.data.model.CategoryKey" />
 
         <import type="com.example.moviedb_37.data.model.CategoryName" />
@@ -62,20 +63,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_popular" />
 
-            <ImageView
-                android:id="@+id/image_load_more_popular"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_36"
-                android:layout_marginTop="@dimen/dp_8"
-                android:background="@color/color_brighter_black"
-                android:onClick="@{viewModel::onClickLoadMorePopular}"
-                android:padding="@dimen/dp_4"
-                android:src="@drawable/ic_arrow_down"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler_popular"
-                app:setVisibility="@{!viewModel.mIsLoadMorePopular}" />
-
             <TextView
                 android:id="@+id/text_view_more_popular"
                 android:layout_width="wrap_content"
@@ -87,7 +74,7 @@
                 android:textColor="@color/color_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_load_more_popular" />
+                app:layout_constraintTop_toBottomOf="@id/recycler_popular" />
 
             <TextView
                 android:id="@+id/text_now_playing"
@@ -126,20 +113,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_now_playing" />
 
-            <ImageView
-                android:id="@+id/image_load_more_now_playing"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_36"
-                android:layout_marginTop="@dimen/dp_8"
-                android:background="@color/color_brighter_black"
-                android:onClick="@{viewModel::onClickLoadMoreNowPlaying}"
-                android:padding="@dimen/dp_4"
-                android:src="@drawable/ic_arrow_down"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler_now_playing"
-                app:setVisibility="@{!viewModel.mIsLoadMoreNowPlaying}" />
-
             <TextView
                 android:id="@+id/text_view_more_now_playing"
                 android:layout_width="wrap_content"
@@ -151,7 +124,7 @@
                 android:textColor="@color/color_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_load_more_now_playing" />
+                app:layout_constraintTop_toBottomOf="@id/recycler_now_playing" />
 
             <TextView
                 android:id="@+id/text_up_coming"
@@ -190,20 +163,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_up_coming" />
 
-            <ImageView
-                android:id="@+id/image_load_more_up_coming"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_36"
-                android:layout_marginTop="@dimen/dp_8"
-                android:background="@color/color_brighter_black"
-                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_UP_COMING, CategoryName.CATEGORY_UP_COMING)}"
-                android:padding="@dimen/dp_4"
-                android:src="@drawable/ic_arrow_down"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler_up_coming"
-                app:setVisibility="@{!viewModel.mIsLoadMoreUpComing}" />
-
             <TextView
                 android:id="@+id/text_view_more_up_coming"
                 android:layout_width="wrap_content"
@@ -215,7 +174,7 @@
                 android:textColor="@color/color_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_load_more_up_coming" />
+                app:layout_constraintTop_toBottomOf="@id/recycler_up_coming" />
 
             <TextView
                 android:id="@+id/text_top_rate"
@@ -253,20 +212,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_top_rate" />
 
-            <ImageView
-                android:id="@+id/image_load_more_top_rate"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_36"
-                android:layout_marginTop="@dimen/dp_8"
-                android:background="@color/color_brighter_black"
-                android:onClick="@{viewModel::onClickLoadMoreTopRate}"
-                android:padding="@dimen/dp_4"
-                android:src="@drawable/ic_arrow_down"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler_top_rate"
-                app:setVisibility="@{!viewModel.mIsLoadMoreTopRate}" />
-
             <TextView
                 android:id="@+id/text_view_more_top_rate"
                 android:layout_width="wrap_content"
@@ -278,7 +223,7 @@
                 android:textColor="@color/color_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_load_more_top_rate" />
+                app:layout_constraintTop_toBottomOf="@id/recycler_top_rate" />
 
             <TextView
                 android:id="@+id/text_genres"

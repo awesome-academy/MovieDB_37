@@ -40,4 +40,9 @@ public interface NameApi {
     @GET("/3/discover/movie")
     Single<CategoryResult> getMoviesByActor(@Query("page") int page,
                                             @Query("with_cast") String actorId);
+
+    @GET("/3/search/{type}")
+    Single<CategoryResult> searchMovie(@Path("type") String type,
+                                       @Query("query") String keyword,
+                                       @Query("page") int page);
 }

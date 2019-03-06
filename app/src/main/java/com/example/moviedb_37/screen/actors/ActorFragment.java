@@ -36,7 +36,9 @@ public class ActorFragment extends BaseFragment implements ActorsAdapter.ItemCli
         View view = inflater.inflate(R.layout.fragment_actor, container, false);
         mBinding = FragmentActorBinding.bind(view);
         mBinding.setViewModel(mViewModel);
-        setupAdapters(mBinding.recyclerActors, new ActorsAdapter(new ArrayList<Actor>()));
+        ActorsAdapter adapter = new ActorsAdapter(new ArrayList<Actor>());
+        adapter.setItemClickListener(this);
+        setupAdapters(mBinding.recyclerActors, adapter);
         return view;
     }
 

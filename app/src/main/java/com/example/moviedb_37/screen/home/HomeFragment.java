@@ -126,7 +126,7 @@ public class HomeFragment extends Fragment implements HomeNavigator
     }
 
     @Override
-    public void onDeleteFavoritiesClick(Movie movie) {
+    public void onDeleteFavoriteMovieClick(Movie movie) {
 
     }
 }

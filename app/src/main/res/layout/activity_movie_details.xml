@@ -22,7 +22,7 @@
             android:layout_height="@dimen/dp_30"
             android:paddingStart="@dimen/dp_16"
             android:paddingLeft="@dimen/dp_16"
-            android:src="@drawable/ic_arrow_down_white"
+            android:src="@drawable/ic_back_white"
             android:onClick="@{() -> viewModel.back()}"
             app:layout_constraintBottom_toTopOf="@+id/player"
             app:layout_constraintStart_toStartOf="parent"

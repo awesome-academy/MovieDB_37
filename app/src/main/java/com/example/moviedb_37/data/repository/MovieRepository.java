@@ -5,6 +5,7 @@ import com.example.moviedb_37.data.model.Movie;
 import com.example.moviedb_37.data.source.MovieDataSource;
 import com.example.moviedb_37.data.source.local.MovieLocalDataSource;
 import com.example.moviedb_37.data.source.remote.MovieRemoteDataSource;
+import com.example.moviedb_37.data.source.remote.config.response.CategoryResult;
 
 import java.util.List;
 
@@ -74,6 +75,11 @@ public class MovieRepository implements MovieDataSource.Local,
     @Override
     public Single<List<Movie>> getMoviesByActor(int page, String actorId) {
         return mMovieRemoteDataSource.getMoviesByActor(page, actorId);
+    }
+
+    @Override
+    public Single<CategoryResult> searchMovie(String type, String keyword, int page) {
+        return mMovieRemoteDataSource.searchMovie(type, keyword, page);
     }
 
     @Override

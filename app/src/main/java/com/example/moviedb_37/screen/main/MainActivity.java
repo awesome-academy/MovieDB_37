@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             case R.id.navigation_fovorities:
                 showFavoriteScreen();
+                break;
             case R.id.navigation_search:
                 showSearchScreen();
                 break;
