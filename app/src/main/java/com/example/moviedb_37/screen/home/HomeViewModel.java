@@ -58,7 +58,7 @@ public class HomeViewModel extends BaseObservable {
     public final ObservableList<Movie> upComingMoviesObservable = new ObservableArrayList<>();
     public final ObservableList<Movie> topRateMoviesObservable = new ObservableArrayList<>();
     public final ObservableList<Genre> genresObservable = new ObservableArrayList<>();
-
+    public final ObservableBoolean isLoadingSuccess = new ObservableBoolean();
 
     private HomeNavigator mNavigator;
 
@@ -81,6 +81,7 @@ public class HomeViewModel extends BaseObservable {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(genres -> genresObservable.addAll(genres)
                         , throwable -> handleError(throwable.getMessage()));
+        isLoadingSuccess.set(true);
         mCompositeDisposable.add(disposable);
     }
 
@@ -178,6 +179,7 @@ public class HomeViewModel extends BaseObservable {
     }
 
     private void handleError(String message) {
+        isLoadingSuccess.set(true);
     }
 
     public void onCategoryClick(View view, String key, String name) {

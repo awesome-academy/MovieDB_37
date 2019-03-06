@@ -16,14 +16,25 @@
         android:background="@color/home_background"
         tools:context=".screen.moviedetail.MovieDetailActivity">
 
+        <ProgressBar
+            setVisibility="@{viewModel.isLoadingSuccess ? false : true}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/dp_8"
+            android:indeterminateDrawable="@drawable/progress_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/image_back"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_30"
+            android:onClick="@{() -> viewModel.back()}"
             android:paddingStart="@dimen/dp_16"
             android:paddingLeft="@dimen/dp_16"
             android:src="@drawable/ic_back_white"
-            android:onClick="@{() -> viewModel.back()}"
             app:layout_constraintBottom_toTopOf="@+id/player"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

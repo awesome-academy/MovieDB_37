@@ -28,7 +28,7 @@ public class SearchViewModel extends BaseObservable {
     private int mCurrentPage;
     private String mSearchType;
     public final ObservableBoolean mIsLoadMore = new ObservableBoolean(false);
-
+    public final ObservableBoolean isLoadingSuccess = new ObservableBoolean(true);
     public SearchViewModel(MovieRepository movieRepository) {
         mMovieRepository = movieRepository;
         mSearchType = SEARCH_TYPE[0];
@@ -56,6 +56,7 @@ public class SearchViewModel extends BaseObservable {
     }
 
     public void searchMovie() {
+        isLoadingSuccess.set(false);
         if (mSearchType.isEmpty() || mKey.isEmpty() || mCurrentPage <= 0) {
             handleError(null);
             return;
@@ -72,6 +73,7 @@ public class SearchViewModel extends BaseObservable {
                         searchedMoviesObservable.addAll(categoryResult.getMovies());
                     }
                     mIsLoadMore.set(false);
+                    isLoadingSuccess.set(true);
                 }, throwable -> handleError(throwable.getMessage()));
         mCompositeDisposable.add(disposable);
     }
@@ -84,6 +86,7 @@ public class SearchViewModel extends BaseObservable {
         mIsLoadMore.set(false);
         totalResultObservable.set(0);
         searchedMoviesObservable.clear();
+        isLoadingSuccess.set(true);
     }
 
     public void increaseCurrentPage() {
