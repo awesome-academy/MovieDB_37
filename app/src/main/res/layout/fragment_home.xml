@@ -26,6 +26,15 @@
             android:paddingTop="@dimen/dp_8"
             android:paddingRight="@dimen/dp_16">
 
+            <ProgressBar
+                setVisibility="@{viewModel.isLoadingSuccess ? false : true}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateDrawable="@drawable/progress_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/text_popular"
                 android:layout_width="wrap_content"
@@ -168,7 +177,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_30"
                 android:layout_marginTop="@dimen/dp_8"
-                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_TOP_RATE, CategoryName.CATEGORY_TOP_RATE)}"
+                android:onClick="@{(view) -> viewModel.onCategoryClick(view, CategoryKey.CATEGORY_UP_COMING, CategoryName.CATEGORY_UP_COMING)}"
                 android:padding="@dimen/dp_4"
                 android:text="@string/title_view_more"
                 android:textColor="@color/color_blue"

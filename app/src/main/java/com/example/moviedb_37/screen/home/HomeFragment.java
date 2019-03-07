@@ -54,21 +54,25 @@ public class HomeFragment extends Fragment implements HomeNavigator
         mPopularAdapter = new CategoryAdapter(new ArrayList<Movie>(0));
         mPopularAdapter.setItemClickListener(this);
         popularRecycler.setAdapter(mPopularAdapter);
+        popularRecycler.setNestedScrollingEnabled(false);
 
         RecyclerView nowPlayingRecycler = mBinding.recyclerNowPlaying;
         mNowPlayingAdapter = new CategoryAdapter(new ArrayList<Movie>(0));
         mNowPlayingAdapter.setItemClickListener(this);
         nowPlayingRecycler.setAdapter(mNowPlayingAdapter);
+        nowPlayingRecycler.setNestedScrollingEnabled(false);
 
         RecyclerView upComingRecycler = mBinding.recyclerUpComing;
         mUpComingAdapter = new CategoryAdapter(new ArrayList<Movie>(0));
         mUpComingAdapter.setItemClickListener(this);
         upComingRecycler.setAdapter(mUpComingAdapter);
+        upComingRecycler.setNestedScrollingEnabled(false);
 
         RecyclerView topRateRecycler = mBinding.recyclerTopRate;
         mTopRateAdapter = new CategoryAdapter(new ArrayList<Movie>(0));
         mTopRateAdapter.setItemClickListener(this);
         topRateRecycler.setAdapter(mTopRateAdapter);
+        topRateRecycler.setNestedScrollingEnabled(false);
 
         RecyclerView genresRecycler = mBinding.recyclerGenre;
         LinearLayoutManager genresLayoutManager = new LinearLayoutManager(getActivity(),
@@ -77,6 +81,7 @@ public class HomeFragment extends Fragment implements HomeNavigator
         mGenresAdapter = new GenresAdapter(new ArrayList<Genre>(0));
         mGenresAdapter.setItemClickListener(this);
         genresRecycler.setAdapter(mGenresAdapter);
+        genresRecycler.setNestedScrollingEnabled(false);
     }
 
     public static HomeFragment newInstance() {

@@ -1,5 +1,7 @@
 package com.example.moviedb_37.screen.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -84,5 +86,7 @@ public class MainActivity extends AppCompatActivity implements
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                 mCurrentFragment, R.id.frame_fragments_container);
     }
-
+    public static Intent getMainActivityIntent(Context context) {
+        return new Intent(context, MainActivity.class);
+    }
 }

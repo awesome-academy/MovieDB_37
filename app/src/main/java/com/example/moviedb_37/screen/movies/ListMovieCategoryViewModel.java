@@ -23,7 +23,7 @@ public class ListMovieCategoryViewModel {
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     private int mCurrentPage;
     public final ObservableBoolean isLoadMore = new ObservableBoolean(false);
-
+    public final ObservableBoolean isLoadingSuccess = new ObservableBoolean();
     public ListMovieCategoryViewModel(MovieRepository movieRepository, int loadBy, String key) {
         mKey = key;
         mLoadBy = loadBy;
@@ -60,6 +60,7 @@ public class ListMovieCategoryViewModel {
                 .subscribe(movies -> {
                     moviesObservable.addAll(movies);
                     isLoadMore.set(false);
+                    isLoadingSuccess.set(true);
                 }, throwable -> handleError(throwable.getMessage()));
         mCompositeDisposable.add(disposable);
     }
@@ -71,6 +72,7 @@ public class ListMovieCategoryViewModel {
                 .subscribe(movies -> {
                     moviesObservable.addAll(movies);
                     isLoadMore.set(false);
+                    isLoadingSuccess.set(true);
                 }, throwable -> handleError(throwable.getMessage()));
         mCompositeDisposable.add(disposable);
     }
@@ -99,6 +101,7 @@ public class ListMovieCategoryViewModel {
                 .subscribe(movies -> moviesObservable.addAll(movies),
                         throwable -> handleError(throwable.getMessage()));
         isLoadMore.set(false);
+        isLoadingSuccess.set(true);
         mCompositeDisposable.add(disposable);
     }
 
@@ -109,6 +112,7 @@ public class ListMovieCategoryViewModel {
                 .subscribe(movies -> moviesObservable.addAll(movies),
                         throwable -> handleError(throwable.getMessage()));
         isLoadMore.set(false);
+        isLoadingSuccess.set(true);
         mCompositeDisposable.add(disposable);
     }
 
@@ -119,6 +123,7 @@ public class ListMovieCategoryViewModel {
                 .subscribe(movies -> moviesObservable.addAll(movies),
                         throwable -> handleError(throwable.getMessage()));
         isLoadMore.set(false);
+        isLoadingSuccess.set(true);
         mCompositeDisposable.add(disposable);
     }
 
@@ -129,6 +134,7 @@ public class ListMovieCategoryViewModel {
                 .subscribe(movies -> moviesObservable.addAll(movies),
                         throwable -> handleError(throwable.getMessage()));
         isLoadMore.set(false);
+        isLoadingSuccess.set(true);
         mCompositeDisposable.add(disposable);
     }
 
@@ -139,9 +145,9 @@ public class ListMovieCategoryViewModel {
                 .subscribe(movies -> moviesObservable.addAll(movies),
                         throwable -> handleError(throwable.getMessage()));
         isLoadMore.set(false);
+        isLoadingSuccess.set(true);
         mCompositeDisposable.add(disposable);
     }
-
 
     public void clear() {
         mCompositeDisposable.clear();
@@ -149,6 +155,7 @@ public class ListMovieCategoryViewModel {
 
     private void handleError(String message) {
         isLoadMore.set(false);
+        isLoadingSuccess.set(true);
     }
 
     public void increaseCurrentPage() {
