@@ -29,6 +29,7 @@ public class SearchViewModel extends BaseObservable {
     private String mSearchType;
     public final ObservableBoolean mIsLoadMore = new ObservableBoolean(false);
     public final ObservableBoolean isLoadingSuccess = new ObservableBoolean(true);
+
     public SearchViewModel(MovieRepository movieRepository) {
         mMovieRepository = movieRepository;
         mSearchType = SEARCH_TYPE[0];
@@ -60,6 +61,9 @@ public class SearchViewModel extends BaseObservable {
         if (mSearchType.isEmpty() || mKey.isEmpty() || mCurrentPage <= 0) {
             handleError(null);
             return;
+        }
+        if (mCurrentPage == Constans.INDEX_UNIT) {
+            isLoadingSuccess.set(false);
         }
         Disposable disposable = mMovieRepository.searchMovie(mSearchType, mKey, mCurrentPage)
                 .subscribeOn(Schedulers.io())
