@@ -4,7 +4,8 @@
     <color name="color_primary_dark">#00574B</color>
     <color name="color_accent">#D81B60</color>
 
-    <color name="home_background">#212121</color>
+    <color name="home_back_ground">#212121</color>
     <color name="color_blue">#00BCD4</color>
+    <color name="color_green">#8BC34A</color>
     <color name="color_brighter_black">#3C3C3C</color>
 </resources>

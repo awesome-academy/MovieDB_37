@@ -30,7 +30,7 @@ import java.util.List;
 
 public class BindingUtils {
 
-    private static final int IMAGE_SIZE_200 = 200;
+    private static final int IMAGE_SIZE_200 = 1280;
 
     @BindingAdapter({"app:bindMovies"})
     public static void setMoviesForRecyclerView(RecyclerView recyclerView,
@@ -70,11 +70,15 @@ public class BindingUtils {
     @BindingAdapter("imageUrl")
     public static void setImage(ImageView imageView, String url) {
         if (url == null || url.isEmpty()) {
-            return;
+            imageView.setImageResource(R.drawable.ic_loading);
         }
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(R.drawable.ic_loading);
+        requestOptions.error(R.drawable.ic_loading);
         String imageLink = StringUtil.getImageLink(IMAGE_SIZE_200, url);
         Glide.with(imageView.getContext())
                 .load(imageLink)
+                .apply(requestOptions)
                 .into(imageView);
     }
 
@@ -85,15 +89,14 @@ public class BindingUtils {
         }
     }
 
-    @BindingAdapter("bindImage")
+    @BindingAdapter("app:bindImage")
     public static void setRoundedImage(ImageView imageView, String url) {
         if (url == null || url.isEmpty()) {
             imageView.setImageResource(R.drawable.ic_my_movie);
-            return;
         }
         String imageLink = StringUtil.getImageLink(IMAGE_SIZE_200, url);
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(R.drawable.ic_my_movie);
+        requestOptions.placeholder(R.drawable.ic_loading);
         requestOptions.error(R.drawable.ic_my_movie);
         Glide.with(imageView.getContext())
                 .load(imageLink)
